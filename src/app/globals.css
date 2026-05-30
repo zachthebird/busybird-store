@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors */
+  --color-primary: #C75B39;
+  --color-primary-hover: #B35A34;
+  --color-secondary: #5B8CB8;
+  --color-accent-1: #F4C542;
+  --color-accent-2: #2D6A6B;
+  --color-neutral: #FDF6ED;
+  --color-dark: #2D2A26;
+
+  /* Typography */
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+  --font-accent: "Caveat", cursive;
+
+  /* Spacing / radius */
+  --radius-card: 0.75rem;
+  --radius-button: 9999px;
+}
+
+/* Base layer */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-neutral text-dark font-body;
+  }
+
+  /* Focus ring */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+}
+
+/* Component utilities */
+@utility container-page {
+  @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+@utility section-padding {
+  @apply py-12 sm:py-16 lg:py-20;
+}
