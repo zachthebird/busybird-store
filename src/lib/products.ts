@@ -42,6 +42,45 @@ export const products: Product[] = [
     // No badge — this is the only currently available product
   },
   {
+    slug: "gamenight-mahjong-tile-earrings",
+    name: "Gamenight Mahjong Tile Earrings",
+    price: 36,
+    description:
+      "Playful 3D-printed tile-shaped drops inspired by classic mahjong tiles. Lightweight and conversation-starting — perfect for game night or everyday whimsy.",
+    details: [
+      "3D-printed resin with hand-painted details",
+      "Hypoallergenic stainless steel posts",
+      "Approximately 1.25\" drop length",
+      "Each pair is slightly unique due to hand-finishing",
+    ],
+    image: "/products/gamenight-mahjong-tile.png",
+    reviews: [
+      {
+        id: "r16",
+        author: "Sarah M.",
+        rating: 5,
+        text: "I get so many compliments on these! They're so unique and really well made. Light enough to wear all day.",
+        date: "2026-04-15",
+      },
+      {
+        id: "r17",
+        author: "Jen L.",
+        rating: 5,
+        text: "Bought these as a gift for my mahjong-obsessed friend and she absolutely loved them. The tile details are spot on.",
+        date: "2026-03-22",
+      },
+      {
+        id: "r18",
+        author: "Taylor R.",
+        rating: 4,
+        text: "Super cute and great quality. I wish they came in more color variations!",
+        date: "2026-05-01",
+      },
+    ],
+    category: "earrings",
+    inStock: true,
+  },
+  {
     slug: "terracotta-sunset-earrings",
     name: "Terracotta Sunset Earrings",
     price: 48,
