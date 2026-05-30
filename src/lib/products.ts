@@ -39,6 +39,7 @@ export const products: Product[] = [
     ],
     category: "earrings",
     inStock: true,
+    // No badge — this is the only currently available product
   },
   {
     slug: "terracotta-sunset-earrings",
@@ -71,6 +72,7 @@ export const products: Product[] = [
     ],
     category: "earrings",
     inStock: true,
+    badge: "Coming Soon",
   },
   {
     slug: "grackle-wing-earrings",
@@ -110,6 +112,7 @@ export const products: Product[] = [
     ],
     category: "earrings",
     inStock: true,
+    badge: "Coming Soon",
   },
   {
     slug: "bluebonnet-chain-necklace",
@@ -142,6 +145,7 @@ export const products: Product[] = [
     ],
     category: "necklaces",
     inStock: true,
+    badge: "Coming Soon",
   },
   {
     slug: "lone-star-pendant",
@@ -181,6 +185,7 @@ export const products: Product[] = [
     ],
     category: "necklaces",
     inStock: true,
+    badge: "Coming Soon",
   },
   {
     slug: "golden-hour-cuff",
@@ -213,6 +218,7 @@ export const products: Product[] = [
     ],
     category: "bracelets",
     inStock: true,
+    badge: "Coming Soon",
   },
 ];
 

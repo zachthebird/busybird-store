@@ -37,6 +37,14 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           className="object-cover group-hover:scale-105 transition-transform duration-500"
           priority={priority}
         />
+        {/* Coming Soon badge */}
+        {product.badge && (
+          <div className="absolute top-3 right-3 z-10">
+            <span className="inline-block font-accent text-lg px-4 py-1.5 rounded-full bg-accent-1 text-dark rotate-3 shadow-lg border-2 border-dark/10">
+              {product.badge}
+            </span>
+          </div>
+        )}
         {/* Quick add overlay */}
         <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           <Button size="sm" onClick={handleAdd}>

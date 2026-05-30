@@ -77,6 +77,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 className="object-cover"
                 priority
               />
+              {product.badge && (
+                <div className="absolute top-4 right-4 z-10">
+                  <span className="inline-block font-accent text-xl px-5 py-2 rounded-full bg-accent-1 text-dark rotate-3 shadow-lg border-2 border-dark/10">
+                    {product.badge}
+                  </span>
+                </div>
+              )}
             </div>
 
             {/* Product info */}
@@ -193,6 +200,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
                       sizes="(max-width: 1024px) 50vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
+                    {p.badge && (
+                      <div className="absolute top-2 right-2 z-10">
+                        <span className="inline-block font-accent text-sm px-3 py-1 rounded-full bg-accent-1 text-dark rotate-3 shadow border border-dark/10">
+                          {p.badge}
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <div className="p-4">
                     <h3 className="font-heading text-sm font-semibold text-dark group-hover:text-primary transition-colors">

@@ -17,6 +17,7 @@ export interface Product {
   reviews: Review[];
   category: string;
   inStock: boolean;
+  badge?: string;
 }
 
 export interface CartItem {
