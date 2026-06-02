@@ -39,6 +39,7 @@ export const products: Product[] = [
     ],
     category: "earrings",
     inStock: true,
+    available: true,
     // No badge — this is the only currently available product
   },
   {
@@ -79,6 +80,7 @@ export const products: Product[] = [
     ],
     category: "earrings",
     inStock: true,
+    available: true,
   },
   {
     slug: "terracotta-sunset-earrings",
@@ -111,6 +113,7 @@ export const products: Product[] = [
     ],
     category: "earrings",
     inStock: true,
+    available: false,
     badge: "Coming Soon",
   },
   {
@@ -151,6 +154,7 @@ export const products: Product[] = [
     ],
     category: "earrings",
     inStock: true,
+    available: false,
     badge: "Coming Soon",
   },
   {
@@ -184,6 +188,7 @@ export const products: Product[] = [
     ],
     category: "necklaces",
     inStock: true,
+    available: false,
     badge: "Coming Soon",
   },
   {
@@ -224,6 +229,7 @@ export const products: Product[] = [
     ],
     category: "necklaces",
     inStock: true,
+    available: false,
     badge: "Coming Soon",
   },
   {
@@ -257,6 +263,7 @@ export const products: Product[] = [
     ],
     category: "bracelets",
     inStock: true,
+    available: false,
     badge: "Coming Soon",
   },
 ];

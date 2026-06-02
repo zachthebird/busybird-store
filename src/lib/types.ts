@@ -17,6 +17,8 @@ export interface Product {
   reviews: Review[];
   category: string;
   inStock: boolean;
+  /** Whether this product can be purchased. Coming Soon products are not available. */
+  available: boolean;
   badge?: string;
 }
 

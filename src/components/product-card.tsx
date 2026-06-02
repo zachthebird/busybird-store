@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/lib/types";
@@ -14,6 +15,10 @@ interface ProductCardProps {
 
 export function ProductCard({ product, priority = false }: ProductCardProps) {
   const addItem = useCartStore((s) => s.addItem);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleAdd = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -45,12 +50,14 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             </span>
           </div>
         )}
-        {/* Quick add overlay */}
-        <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-          <Button size="sm" onClick={handleAdd}>
-            Add to Cart
-          </Button>
-        </div>
+        {/* Quick add overlay — only show for available products after client mount */}
+        {mounted && product.available && (
+          <div className="absolute inset-0 flex items-end justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <Button size="sm" onClick={handleAdd}>
+              Add to Cart
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Info */}
