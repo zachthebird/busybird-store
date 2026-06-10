@@ -162,49 +162,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </Container>
       </Section>
 
-      {/* Reviews */}
-      {product.reviews.length > 0 && (
-        <Section bg="neutral">
-          <Container>
-            <Heading className="mb-8">Customer Reviews</Heading>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {product.reviews.map((review) => (
-                <div
-                  key={review.id}
-                  className="bg-white p-6 rounded-card border border-dark/5"
-                >
-                  <div className="flex items-center gap-1 mb-3">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <svg
-                        key={i}
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill={i < review.rating ? "#F4C542" : "none"}
-                        stroke={i < review.rating ? "#F4C542" : "#D1D5DB"}
-                        strokeWidth="2"
-                      >
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                      </svg>
-                    ))}
-                  </div>
-                  <p className="text-sm text-dark/60 leading-relaxed mb-3">
-                    &ldquo;{review.text}&rdquo;
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-medium text-dark">
-                      {review.author}
-                    </span>
-                    <span className="text-xs text-dark/30">{review.date}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Container>
-        </Section>
-      )}
-
       {/* Related products */}
       {related.length > 0 && (
         <Section bg="white">
