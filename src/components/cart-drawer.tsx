@@ -1,13 +1,48 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCartStore } from "@/lib/cart";
 import { Button } from "./button";
+import { toast } from "./toast";
 
 export function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, updateQuantity, subtotal } =
     useCartStore();
+  const [checkingOut, setCheckingOut] = useState(false);
+
+  const handleCheckout = async () => {
+    setCheckingOut(true);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((i) => ({
+            slug: i.product.slug,
+            quantity: i.quantity,
+          })),
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.url) {
+        window.location.href = data.url;
+        return;
+      }
+      if (res.status === 503) {
+        toast(
+          "Online checkout is almost ready — check back very soon!",
+          "info"
+        );
+      } else {
+        toast(data.error ?? "We couldn't start checkout. Please try again.", "error");
+      }
+    } catch {
+      toast("We couldn't start checkout. Please try again.", "error");
+    }
+    setCheckingOut(false);
+  };
 
   return (
     <>
@@ -169,8 +204,13 @@ export function CartDrawer() {
                 <p className="text-xs text-dark/30 mb-4">
                   Shipping &amp; taxes calculated at checkout
                 </p>
-                <Button className="w-full" size="lg">
-                  Checkout
+                <Button
+                  className="w-full"
+                  size="lg"
+                  onClick={handleCheckout}
+                  disabled={checkingOut}
+                >
+                  {checkingOut ? "Redirecting to checkout…" : "Checkout"}
                 </Button>
               </div>
             </>

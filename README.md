@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BusyBird Store
 
-## Getting Started
+Storefront for [BusyBird](https://busybird-store.vercel.app) — playful, handcrafted 3D-printed resin jewelry made in Austin, TX.
 
-First, run the development server:
+## Stack
+
+- [Next.js](https://nextjs.org) (App Router) + React + TypeScript
+- Tailwind CSS 4
+- [zustand](https://github.com/pmndrs/zustand) for the persisted cart
+- [Stripe Checkout](https://stripe.com/payments/checkout) for payments
+
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev   # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable | Purpose |
+| --- | --- |
+| `STRIPE_SECRET_KEY` | Enables checkout. Without it, the Checkout button shows a friendly "coming soon" message. Use a `sk_test_...` key for test mode, `sk_live_...` for real payments. |
+| `NEXT_PUBLIC_SITE_URL` | Canonical site URL used for metadata, sitemap, and Stripe product images. Defaults to `https://busybird-store.vercel.app`. |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How checkout works
 
-## Learn More
+The cart drawer posts `{ items: [{ slug, quantity }] }` to `POST /api/checkout`
+([src/app/api/checkout/route.ts](src/app/api/checkout/route.ts)). Prices and
+availability are validated server-side against the catalog in
+[src/lib/products.ts](src/lib/products.ts) — the client never sets prices.
+The route creates a Stripe Checkout Session (shipping to US/CA/UK, rates
+mirroring the [/shipping](src/app/shipping/page.tsx) page) and redirects to
+Stripe. On success, customers land on `/checkout/success` and the cart clears.
 
-To learn more about Next.js, take a look at the following resources:
+Orders appear in the [Stripe dashboard](https://dashboard.stripe.com/payments).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Catalog
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Products live in [src/lib/products.ts](src/lib/products.ts). Set
+`available: true` to make a product purchasable; `badge: "Coming Soon"` items
+display but can't be bought. Product images go in `public/products/`.
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deployed on Vercel; pushes to `main` deploy to production.

@@ -33,6 +33,9 @@ export async function generateMetadata({
   };
 }
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://busybird-store.vercel.app";
+
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
@@ -44,8 +47,30 @@ export default async function ProductPage({ params }: ProductPageProps) {
     .filter((p) => p.category === product.category && p.slug !== product.slug)
     .slice(0, 3);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    image: `${SITE_URL}${product.image}`,
+    description: product.description,
+    brand: { "@type": "Brand", name: "BusyBird" },
+    offers: {
+      "@type": "Offer",
+      price: product.price.toFixed(2),
+      priceCurrency: "USD",
+      availability: product.available
+        ? "https://schema.org/InStock"
+        : "https://schema.org/PreOrder",
+      url: `${SITE_URL}/products/${product.slug}`,
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Breadcrumb */}
       <div className="bg-neutral border-b border-dark/5">
         <Container>
