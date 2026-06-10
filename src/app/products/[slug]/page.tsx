@@ -34,7 +34,7 @@ export async function generateMetadata({
 }
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://busybird-store.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://busybirdaustin.com";
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;

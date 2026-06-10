@@ -25,7 +25,7 @@ const caveat = Caveat({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://busybird-store.vercel.app"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://busybirdaustin.com"
   ),
   title: {
     default: "BusyBird — Austin-Made 3D Printed Jewelry",

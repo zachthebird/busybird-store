@@ -1,6 +1,6 @@
 # BusyBird Store
 
-Storefront for [BusyBird](https://busybird-store.vercel.app) — playful, handcrafted 3D-printed resin jewelry made in Austin, TX.
+Storefront for [BusyBird](https://busybirdaustin.com) — playful, handcrafted 3D-printed resin jewelry made in Austin, TX.
 
 ## Stack
 
@@ -21,7 +21,7 @@ npm run dev   # http://localhost:3000
 | Variable | Purpose |
 | --- | --- |
 | `STRIPE_SECRET_KEY` | Enables checkout. Without it, the Checkout button shows a friendly "coming soon" message. Use a `sk_test_...` key for test mode, `sk_live_...` for real payments. |
-| `NEXT_PUBLIC_SITE_URL` | Canonical site URL used for metadata, sitemap, and Stripe product images. Defaults to `https://busybird-store.vercel.app`. |
+| `NEXT_PUBLIC_SITE_URL` | Canonical site URL used for metadata, sitemap, and Stripe product images. Defaults to `https://busybirdaustin.com`. |
 
 ## How checkout works
 

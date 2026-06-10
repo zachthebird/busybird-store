@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import { getProductBySlug } from "@/lib/products";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://busybird-store.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://busybirdaustin.com";
 
 // Shipping rates must match the promises on /shipping — update both together.
 const STANDARD_SHIPPING_CENTS = 495;

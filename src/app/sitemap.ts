@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { products } from "@/lib/products";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://busybird-store.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://busybirdaustin.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
