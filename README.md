@@ -1,5 +1,7 @@
 # BusyBird Store
 
+[![CI](https://github.com/zachthebird/busybird-store/actions/workflows/ci.yml/badge.svg)](https://github.com/zachthebird/busybird-store/actions/workflows/ci.yml)
+
 Storefront for [BusyBird](https://busybirdaustin.com) — playful, handcrafted 3D-printed resin jewelry made in Austin, TX.
 
 ## Stack
