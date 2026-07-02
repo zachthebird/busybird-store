@@ -32,11 +32,16 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
-  if (event.type === "checkout.session.completed") {
+  if (
+    event.type === "checkout.session.completed" &&
+    (event.data.object as Stripe.Checkout.Session).payment_status === "paid"
+  ) {
     const session = event.data.object as Stripe.Checkout.Session;
-    // Verified source of truth for a paid order. There's no order store yet, so
-    // this records to the server log; swap for real persistence + fulfillment
-    // (email, print queue) when an order database exists.
+    // Verified source of truth for a paid order. `completed` can fire before
+    // funds settle for async payment methods, so we also require payment_status
+    // === "paid". There's no order store yet, so this records to the server log;
+    // swap for real persistence + fulfillment (email, print queue) when an order
+    // database exists — and add idempotency on session.id (Stripe retries).
     console.log("[order] paid", {
       id: session.id,
       email: session.customer_details?.email ?? null,
