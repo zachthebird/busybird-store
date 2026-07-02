@@ -48,6 +48,21 @@ export const metadata: Metadata = {
       "Playful, handcrafted 3D-printed resin jewelry made in Austin, Texas.",
     type: "website",
     siteName: "BusyBird",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "BusyBird — Austin-Made 3D-Printed Jewelry",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BusyBird — Austin-Made 3D Printed Jewelry",
+    description:
+      "Playful, handcrafted 3D-printed resin jewelry made in Austin, Texas.",
+    images: ["/og.png"],
   },
 };
 
