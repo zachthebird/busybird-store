@@ -28,7 +28,7 @@ export default function ShippingPage() {
 
           <div className="bg-white p-6 rounded-card border border-dark/5">
             <h3 className="font-heading font-semibold text-dark mb-2">International Shipping</h3>
-            <p>We ship to Canada and the UK. Rates calculated at checkout. Please allow 10-14 business days for delivery.</p>
+            <p>We currently ship within the United States only. International shipping is coming soon — <Link href="/contact" className="text-primary hover:text-primary-hover underline underline-offset-4">reach out</Link> if you&apos;d like to be notified.</p>
           </div>
 
           <div className="bg-white p-6 rounded-card border border-dark/5">
