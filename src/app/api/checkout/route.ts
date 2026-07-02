@@ -6,9 +6,12 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://busybirdaustin.com";
 
 // Shipping rates must match the promises on /shipping — update both together.
+// US-only for now: Stripe shows the same fixed shipping_options to every
+// session regardless of the address chosen, so offering an "International"
+// rate next to a free/cheap US rate let a non-US buyer select the US rate.
+// Ship US-only until per-country rate logic exists; keep /shipping in sync.
 const STANDARD_SHIPPING_CENTS = 495;
 const EXPRESS_SHIPPING_CENTS = 1495;
-const INTL_SHIPPING_CENTS = 1995;
 const FREE_SHIPPING_THRESHOLD_CENTS = 7500;
 
 const MAX_QUANTITY_PER_ITEM = 20;
@@ -46,23 +49,27 @@ export async function POST(request: NextRequest) {
     const product =
       typeof item?.slug === "string" ? getProductBySlug(item.slug) : undefined;
     const quantity = Number.isInteger(item?.quantity) ? item.quantity : 0;
-    if (
-      !product ||
-      !product.available ||
-      quantity < 1 ||
-      quantity > MAX_QUANTITY_PER_ITEM
-    ) {
+    if (!product || !product.available) {
       return NextResponse.json(
         { error: "Your cart contains an item that isn't available." },
         { status: 400 }
       );
     }
-    subtotalCents += product.price * 100 * quantity;
+    if (quantity < 1 || quantity > MAX_QUANTITY_PER_ITEM) {
+      return NextResponse.json(
+        {
+          error: `Please choose a quantity between 1 and ${MAX_QUANTITY_PER_ITEM} for "${product.name}".`,
+        },
+        { status: 400 }
+      );
+    }
+    const unitAmount = Math.round(product.price * 100);
+    subtotalCents += unitAmount * quantity;
     lineItems.push({
       quantity,
       price_data: {
         currency: "usd",
-        unit_amount: product.price * 100,
+        unit_amount: unitAmount,
         product_data: {
           name: product.name,
           images: [`${SITE_URL}${product.image}`],
@@ -80,7 +87,7 @@ export async function POST(request: NextRequest) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: lineItems,
-      shipping_address_collection: { allowed_countries: ["US", "CA", "GB"] },
+      shipping_address_collection: { allowed_countries: ["US"] },
       shipping_options: [
         {
           shipping_rate_data: {
@@ -106,17 +113,6 @@ export async function POST(request: NextRequest) {
             delivery_estimate: {
               minimum: { unit: "business_day", value: 2 },
               maximum: { unit: "business_day", value: 3 },
-            },
-          },
-        },
-        {
-          shipping_rate_data: {
-            type: "fixed_amount",
-            display_name: "International — Canada & UK",
-            fixed_amount: { amount: INTL_SHIPPING_CENTS, currency: "usd" },
-            delivery_estimate: {
-              minimum: { unit: "business_day", value: 10 },
-              maximum: { unit: "business_day", value: 14 },
             },
           },
         },
