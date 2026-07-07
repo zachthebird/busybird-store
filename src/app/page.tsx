@@ -1,9 +1,19 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
 import { Heading, Container } from "@/components/ui";
 import { Button } from "@/components/button";
+
+export const metadata: Metadata = {
+  // Self-canonical so campaign/UTM query params don't fragment the homepage
+  // into duplicate URLs. Relative path resolves against metadataBase.
+  // Kept here (not in the root layout) because metadata alternates inherit
+  // to children — a layout-level canonical would wrongly point every static
+  // page at "/".
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
   const featured = products.slice(0, 4);
