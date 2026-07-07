@@ -89,6 +89,10 @@ const jsonLd = {
       image: `${SITE_URL}/og.png`,
       description:
         "Playful, handcrafted 3D-printed resin jewelry made in East Austin, Texas — colorful pieces inspired by Texas culture, from bluebonnets to grackles.",
+      areaServed: {
+        "@type": "AdministrativeArea",
+        name: "Greater Austin, Texas",
+      },
       sameAs: ["https://busybird.etsy.com", "https://x.com/busybirdatx"],
     },
     {
