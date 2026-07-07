@@ -6,10 +6,10 @@ export const products: Product[] = [
     name: "Mahjong Tile Earrings",
     price: 36,
     description:
-      "Playful 3D-printed tile-shaped drops inspired by classic mahjong tiles. Lightweight and conversation-starting — perfect for game night or everyday whimsy.",
+      "Crisp white 3D-printed mahjong tiles stamped with the game's most iconic faces — the red dragon character and green bamboo — hung from simple silver ear wires. Lightweight, graphic, and guaranteed to start a conversation at the table.",
     details: [
-      "3D-printed resin with hand-painted details",
-      "Hypoallergenic stainless steel posts",
+      "3D-printed resin tiles with hand-painted red and green detailing",
+      "Stainless steel ear wires",
       "Approximately 1.25\" drop length",
       "Each pair is slightly unique due to hand-finishing",
     ],
@@ -24,12 +24,12 @@ export const products: Product[] = [
     name: "Gamenight Mahjong Tile Earrings",
     price: 36,
     description:
-      "Playful 3D-printed tile-shaped drops inspired by classic mahjong tiles. Lightweight and conversation-starting — perfect for game night or everyday whimsy.",
+      "A deliberately mismatched pair for the serious player — a green bamboo tile paired with the hand-illustrated 'one bamboo' bird tile, each 3D-printed and painted by hand. A little more detailed, a little more eclectic — made for game night.",
     details: [
-      "3D-printed resin with hand-painted details",
-      "Hypoallergenic stainless steel posts",
-      "Approximately 1.25\" drop length",
-      "Each pair is slightly unique due to hand-finishing",
+      "3D-printed resin with hand-painted multi-color detail",
+      "Stainless steel ear wires",
+      "Intentionally mismatched left and right tile designs",
+      "Approximately 1.25\" drop length; each pair varies with hand-finishing",
     ],
     image: "/products/gamenight-mahjong-tile.png",
     category: "earrings",
@@ -44,7 +44,7 @@ export const products: Product[] = [
       "Warm orange-brown drops that capture the glow of a Texas Hill Country sunset. Hand-finished with a subtle gradient that catches the light beautifully.",
     details: [
       "3D-printed resin with hand-applied gradient finish",
-      "Hypoallergenic stainless steel posts",
+      "Stainless steel posts",
       "Approximately 1.5\" drop length",
       "Inspired by Austin skyline silhouettes at dusk",
     ],
@@ -62,7 +62,7 @@ export const products: Product[] = [
       "Dramatic wing-shaped drops with an iridescent finish that shifts from deep purple to teal green — just like a grackle's feathers in the Texas sun. Bold, unexpected, and impossible to ignore.",
     details: [
       "3D-printed resin with iridescent multi-chrome finish",
-      "Hypoallergenic stainless steel posts",
+      "Stainless steel posts",
       "Approximately 2\" drop length",
       "Each pair has a unique iridescent pattern",
     ],
@@ -113,11 +113,11 @@ export const products: Product[] = [
     name: "Golden Hour Cuff",
     price: 56,
     description:
-      "A warm gold open cuff with a hand-engraved sunburst pattern radiating from the center. Designed to catch the golden hour light all day long — an everyday reminder of Texas magic.",
+      "A warm brushed-gold open cuff with a hand-engraved sunburst radiating out from a small Texas state outline at its center. Designed to catch the golden-hour light all day long — understated Lone Star pride you can wear with anything.",
     details: [
       "3D-printed resin with warm gold finish and engraved details",
       "Open cuff design, adjustable to fit most wrists",
-      "Sunburst pattern radiates from center",
+      "Engraved Texas state outline with a sunburst radiating from center",
       "Approximately 0.5\" wide at center",
     ],
     image: "/products/golden-hour-cuff.png",
