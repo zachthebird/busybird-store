@@ -55,6 +55,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
     image: `${SITE_URL}${product.image}`,
     description: product.description,
     brand: { "@type": "Brand", name: "BusyBird" },
+    sku: product.slug,
+    itemCondition: "https://schema.org/NewCondition",
     offers: {
       "@type": "Offer",
       price: product.price.toFixed(2),
@@ -174,8 +176,20 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 </ul>
               </div>
 
-              {/* Add to cart */}
-              <AddToCartButton product={product} />
+              {/* Add to cart (available) or Coming Soon state */}
+              {product.available ? (
+                <AddToCartButton product={product} />
+              ) : (
+                <div>
+                  <Button size="lg" disabled className="w-full sm:w-auto">
+                    Coming Soon
+                  </Button>
+                  <p className="mt-2 text-xs text-dark/40">
+                    This piece isn&apos;t available for purchase yet — check back
+                    soon.
+                  </p>
+                </div>
+              )}
 
               <Divider className="my-6" />
 
