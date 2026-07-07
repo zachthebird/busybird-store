@@ -31,7 +31,7 @@ export const products: Product[] = [
       "Intentionally mismatched left and right tile designs",
       "Approximately 1.25\" drop length; each pair varies with hand-finishing",
     ],
-    image: "/products/gamenight-mahjong-tile.png",
+    image: "/products/gamenight-mahjong-tile.jpg",
     category: "earrings",
     inStock: true,
     available: true,
