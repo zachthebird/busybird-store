@@ -66,6 +66,41 @@ export const metadata: Metadata = {
   },
 };
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://busybirdaustin.com";
+
+// Site-wide entity graph. Organization establishes the brand entity;
+// WebSite links back to it via publisher. No SearchAction — there is no
+// on-site search endpoint to point one at, and an invalid one would be
+// flagged by Google. Uses the same SITE_URL expression as the product
+// page's Product JSON-LD so the two never drift.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "BusyBird",
+      url: SITE_URL,
+      // Stand-in logo: og.png is a branded share card, not a dedicated
+      // logo mark. Replace with a square/transparent logo asset when one
+      // exists, then this URL can stay or point at the new file.
+      logo: `${SITE_URL}/og.png`,
+      image: `${SITE_URL}/og.png`,
+      description:
+        "Playful, handcrafted 3D-printed resin jewelry made in East Austin, Texas — colorful pieces inspired by Texas culture, from bluebonnets to grackles.",
+      sameAs: ["https://busybird.etsy.com", "https://x.com/busybirdatx"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "BusyBird",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -77,6 +112,10 @@ export default function RootLayout({
       className={`${playfair.variable} ${inter.variable} ${caveat.variable}`}
     >
       <body className="min-h-screen flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Providers>
           <Header />
           <main className="flex-1">{children}</main>
