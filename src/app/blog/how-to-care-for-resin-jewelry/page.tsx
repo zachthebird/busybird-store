@@ -10,10 +10,14 @@ export const metadata: Metadata = {
   title: post.title,
   description: post.description,
   alternates: { canonical: `/blog/${post.slug}` },
+  // Page openGraph replaces the layout's wholesale (no deep merge), so
+  // siteName and the share image must be restated here.
   openGraph: {
     title: post.title,
     description: post.description,
     type: "article",
+    siteName: "BusyBird",
+    images: ["/og.png"],
   },
 };
 
@@ -115,9 +119,9 @@ export default function ResinCarePage() {
                 will be grateful.
               </p>
               <p className="mt-4">
-                The metal parts — we use stainless steel ear wires and posts —
-                mostly just want to stay dry. If they get wet, a quick wipe is
-                all it takes.
+                The metal parts — our findings are stainless steel — mostly
+                just want to stay dry. If they get wet, a quick wipe is all
+                it takes.
               </p>
             </div>
 

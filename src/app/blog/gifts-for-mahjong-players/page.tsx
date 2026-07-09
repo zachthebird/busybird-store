@@ -20,11 +20,14 @@ export const metadata: Metadata = {
   title: post.title,
   description: post.description,
   alternates: { canonical: `/blog/${post.slug}` },
+  // Page openGraph replaces the layout's wholesale (no deep merge), so
+  // siteName and an image fallback must be restated here.
   openGraph: {
     title: post.title,
     description: post.description,
     type: "article",
-    images: mahjongPicks[0] ? [mahjongPicks[0].image] : undefined,
+    siteName: "BusyBird",
+    images: [mahjongPicks[0]?.image ?? "/og.png"],
   },
 };
 
@@ -60,8 +63,8 @@ export default function MahjongGiftGuidePage() {
               <p className="mb-6">
                 The best mahjong gifts nod to the game without being a
                 novelty. Full disclosure: these two are ours — 3D-printed
-                resin tiles, hand-painted, on stainless steel ear wires, made
-                to order in Austin.
+                resin tiles, hand-painted, with stainless steel findings,
+                made to order in Austin.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -139,8 +142,8 @@ export default function MahjongGiftGuidePage() {
                 Handmade gifts need lead time. Our jewelry is made to order —
                 allow <strong>3&ndash;5 business days of production</strong>{" "}
                 before it ships, plus 5&ndash;7 business days for standard US
-                shipping. Translation: order about two weeks before you need
-                it, and earlier around holidays. Standard shipping is free on
+                shipping. Translation: order about three weeks before you
+                need it, and earlier around holidays. Standard shipping is free on
                 orders over $75, and the fine print lives on our{" "}
                 <Link
                   href="/shipping"
@@ -160,7 +163,7 @@ export default function MahjongGiftGuidePage() {
                 <li>&bull; Wearable: mahjong tile earrings they&apos;ll get asked about</li>
                 <li>&bull; For the host: tile set upgrade, table mat, racks &amp; score cards</li>
                 <li>&bull; Know their game: American, Hong Kong, and Riichi differ</li>
-                <li>&bull; Made-to-order = order ~2 weeks ahead</li>
+                <li>&bull; Made-to-order = order ~3 weeks ahead</li>
               </ul>
             </div>
 
