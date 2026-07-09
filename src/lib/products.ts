@@ -6,7 +6,7 @@ export const products: Product[] = [
     name: "Mahjong Tile Earrings",
     price: 36,
     description:
-      "Crisp white 3D-printed mahjong tiles stamped with the game's most iconic faces — the red dragon character and green bamboo — hung from simple silver ear wires. Lightweight, graphic, and guaranteed to start a conversation at the table.",
+      "Crisp white 3D-printed mahjong tiles stamped with the game's most iconic faces — the red dragon character and green bamboo — hung from silver-tone stainless steel ear wires. Lightweight, graphic, and guaranteed to start a conversation at the table.",
     details: [
       "3D-printed resin tiles with hand-painted red and green detailing",
       "Stainless steel ear wires",
