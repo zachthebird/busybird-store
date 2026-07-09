@@ -61,9 +61,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
       "@type": "Offer",
       price: product.price.toFixed(2),
       priceCurrency: "USD",
+      // OutOfStock, not PreOrder: Coming Soon items have no purchase path
+      // (disabled button, checkout rejects them), and PreOrder asserts the
+      // item can be ordered now — a structured-data/page mismatch Google
+      // can penalize. Switch to PreOrder only if a real preorder flow ships.
       availability: product.available
         ? "https://schema.org/InStock"
-        : "https://schema.org/PreOrder",
+        : "https://schema.org/OutOfStock",
       url: `${SITE_URL}/products/${product.slug}`,
     },
   };
