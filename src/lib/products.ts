@@ -126,6 +126,139 @@ export const products: Product[] = [
     available: false,
     badge: "Coming Soon",
   },
+
+  // ---------------------------------------------------------------------
+  // PLACEHOLDER LISTINGS (added July 2026). Images are generated "photo
+  // coming soon" cards — swap for real product photos 1:1 at the same path.
+  // Prices and physical details (drop lengths, finishes) are provisional;
+  // maker confirms both before flipping `available: true`.
+  // ---------------------------------------------------------------------
+  {
+    slug: "gecko-dangle-earrings",
+    name: "Gecko Dangle Earrings",
+    price: 35,
+    description:
+      "A little porch gecko for your ears — the tiny roommate who patrols every Texas porch light, 3D-printed in resin and hand-painted so its curled tail and toes catch the light. Charming, slightly weird, entirely BusyBird.",
+    details: [
+      "3D-printed resin with hand-painted details",
+      "Stainless steel ear wires",
+      "Approximately 1.75\" drop length",
+      "Each gecko varies slightly with hand-finishing",
+    ],
+    image: "/products/gecko-dangle-earrings.png",
+    category: "earrings",
+    inStock: true,
+    available: false,
+    badge: "Coming Soon",
+  },
+  {
+    slug: "lobster-dangle-earrings",
+    name: "Lobster Dangle Earrings",
+    price: 35,
+    description:
+      "Bright red lobsters, claws up, ready for the boil. 3D-printed resin with a glossy hand-painted finish — beach-shack kitsch done just elevated enough to wear anywhere. Guaranteed to start at least one conversation per outing.",
+    details: [
+      "3D-printed resin with glossy hand-painted finish",
+      "Stainless steel ear wires",
+      "Approximately 1.5\" drop length",
+      "Each pair varies slightly with hand-finishing",
+    ],
+    image: "/products/lobster-dangle-earrings.png",
+    category: "earrings",
+    inStock: true,
+    available: false,
+    badge: "Coming Soon",
+  },
+  {
+    slug: "corndog-earrings",
+    name: "Corndog Earrings",
+    price: 35,
+    description:
+      "An ode to the corny dog — golden-battered, mustard-striped, and worn with the confidence of someone who knows the State Fair food line is worth it. 3D-printed resin, hand-painted down to the stick.",
+    details: [
+      "3D-printed resin with hand-painted batter and mustard detail",
+      "Stainless steel ear wires",
+      "Approximately 1.75\" drop length",
+      "Each pair varies slightly with hand-finishing",
+    ],
+    image: "/products/corndog-earrings.png",
+    category: "earrings",
+    inStock: true,
+    available: false,
+    badge: "Coming Soon",
+  },
+  {
+    slug: "prickly-pear-cactus-earrings",
+    name: "Prickly Pear Cactus Earrings",
+    price: 35,
+    description:
+      "Texas's favorite cactus, minus the spines that hurt. Green prickly pear paddles topped with a hot-pink bloom, 3D-printed in resin and hand-painted — a little desert garden that goes with denim, dresses, and everything between.",
+    details: [
+      "3D-printed resin with hand-painted paddle and bloom details",
+      "Stainless steel ear wires",
+      "Approximately 1.5\" drop length",
+      "Each pair varies slightly with hand-finishing",
+    ],
+    image: "/products/prickly-pear-cactus-earrings.png",
+    category: "earrings",
+    inStock: true,
+    available: false,
+    badge: "Coming Soon",
+  },
+  {
+    slug: "candy-corn-earrings",
+    name: "Candy Corn Earrings",
+    price: 35,
+    description:
+      "The most argued-about candy in America, now in earring form. Classic tri-color stripes, 3D-printed in resin with a soft glossy finish — sweet enough for October, divisive enough to be fun year-round.",
+    details: [
+      "3D-printed resin with hand-painted tri-color stripes",
+      "Stainless steel ear wires",
+      "Approximately 1\" drop length",
+      "Part of the BusyBird Halloween collection",
+    ],
+    image: "/products/candy-corn-earrings.png",
+    category: "earrings",
+    inStock: true,
+    available: false,
+    badge: "Coming Soon",
+  },
+  {
+    slug: "ghost-earrings",
+    name: "Little Ghost Earrings",
+    price: 35,
+    description:
+      "Two small, extremely friendly ghosts — soft white resin with hand-painted faces that land closer to 'aww' than 'boo.' Light enough to haunt your ears all day through spooky season and beyond.",
+    details: [
+      "3D-printed resin with hand-painted faces",
+      "Stainless steel ear wires",
+      "Approximately 1.25\" drop length",
+      "Part of the BusyBird Halloween collection",
+    ],
+    image: "/products/ghost-earrings.png",
+    category: "earrings",
+    inStock: true,
+    available: false,
+    badge: "Coming Soon",
+  },
+  {
+    slug: "austin-bat-earrings",
+    name: "Austin Bat Earrings",
+    price: 35,
+    description:
+      "Every evening in summer, over a million bats pour out from under the Congress Avenue Bridge — Austin's spookiest and most beloved residents. Wing-spread silhouettes in deep midnight resin: Halloween for everyone else, hometown pride for us.",
+    details: [
+      "3D-printed resin in a deep midnight finish",
+      "Stainless steel ear wires",
+      "Approximately 1.5\" wingspan",
+      "Part of the BusyBird Halloween collection — and Austin canon",
+    ],
+    image: "/products/austin-bat-earrings.png",
+    category: "earrings",
+    inStock: true,
+    available: false,
+    badge: "Coming Soon",
+  },
 ];
 
 export function getProductBySlug(slug: string): Product | undefined {
