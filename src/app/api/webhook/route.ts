@@ -15,17 +15,27 @@ import Stripe from "stripe";
 //   1. Idempotency — Stripe redelivers events, so we keep a flag in the
 //      PaymentIntent's metadata (PaymentIntents stay updatable after payment;
 //      completed Checkout Sessions don't). Flag set -> acknowledge and stop.
+//      Fully-discounted sessions (payment_status "no_payment_required") have
+//      no PaymentIntent; they're still orders and are notified every delivery
+//      rather than dropped.
 //   2. Notify — Telegram message to the owner when ORDER_TELEGRAM_BOT_TOKEN +
-//      ORDER_TELEGRAM_CHAT_ID are set; the order summary is always written to
-//      the server log either way. A failed configured notification returns 500
-//      so Stripe retries — never silently drop a paid order.
-//   3. Mark — set the flag only after a successful notification. If marking
-//      fails we still return 200: a duplicate Telegram ping on some later
-//      manual redelivery is better than a retry loop.
+//      ORDER_TELEGRAM_CHAT_ID are BOTH set; the order summary is always
+//      written to the server log first (note: Vercel runtime logs are
+//      short-lived — add a log drain if the log itself must be durable;
+//      Stripe's dashboard remains the permanent record either way).
+//      Telegram failures are split: transient (429/5xx/network) returns 500
+//      so Stripe retries; permanent (other 4xx: bad token/chat id) returns
+//      200 WITHOUT marking, so retries don't hammer a dead config — fix the
+//      config, then redeliver the event from the Stripe dashboard.
+//   3. Mark — the notified flag is set ONLY after a Telegram message actually
+//      sent. Unconfigured/half-configured runs never mark, so configuring
+//      later + manual redelivery still produces the notification.
 // Stripe itself is the order store (sessions + line items are retrievable
 // indefinitely); a database earns its keep only when fulfillment needs state.
 
 const NOTIFIED_KEY = "busybird_order_notified";
+// Telegram sendMessage caps text at 4096 chars.
+const TELEGRAM_MAX = 4000;
 
 function formatOrderSummary(
   session: Stripe.Checkout.Session,
@@ -37,7 +47,10 @@ function formatOrderSummary(
   const address = session.collected_information?.shipping_details?.address;
 
   const lines = [
-    `New BusyBird order — $${amount} ${currency}`,
+    `New BusyBird order — $${amount} ${currency}` +
+      (session.payment_status === "no_payment_required"
+        ? " (fully discounted — no payment required)"
+        : ""),
     ...lineItems.map((li) => `• ${li.description} ×${li.quantity ?? 1}`),
   ];
   if (customer?.name || customer?.email) {
@@ -53,25 +66,32 @@ function formatOrderSummary(
   return lines.join("\n");
 }
 
+type SendResult = "sent" | "permanent-failure" | "transient-failure";
+
 async function sendTelegram(
   token: string,
   chatId: string,
   text: string
-): Promise<boolean> {
+): Promise<SendResult> {
+  const body =
+    text.length > TELEGRAM_MAX ? `${text.slice(0, TELEGRAM_MAX)}\n…` : text;
   try {
     const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       // Plain text on purpose — parse_mode would require escaping order data.
-      body: JSON.stringify({ chat_id: chatId, text }),
+      body: JSON.stringify({ chat_id: chatId, text: body }),
     });
-    if (!res.ok) {
-      console.error("[order] telegram send failed:", res.status, await res.text());
-    }
-    return res.ok;
+    if (res.ok) return "sent";
+    console.error("[order] telegram send failed:", res.status, await res.text());
+    // 429 and 5xx are worth retrying; other 4xx (bad token, bad chat id)
+    // won't get better on Stripe's retry schedule.
+    return res.status === 429 || res.status >= 500
+      ? "transient-failure"
+      : "permanent-failure";
   } catch (err) {
     console.error("[order] telegram send failed:", err);
-    return false;
+    return "transient-failure";
   }
 }
 
@@ -98,20 +118,24 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
-  // `completed` can fire before funds settle for async payment methods, so it
-  // only counts with payment_status === "paid"; async settlements arrive later
-  // as `async_payment_succeeded`.
+  // Fulfill unless payment is actually outstanding (Stripe's own guidance):
+  // "paid" is the normal card flow; "no_payment_required" is a legitimately
+  // $0 session (e.g. a 100%-off promo code with free shipping); async
+  // payment methods complete later via async_payment_succeeded. Only
+  // "unpaid" waits.
   const session = event.data.object as Stripe.Checkout.Session;
   const isPaidOrder =
     (event.type === "checkout.session.completed" &&
-      session.payment_status === "paid") ||
+      session.payment_status !== "unpaid") ||
     event.type === "checkout.session.async_payment_succeeded";
   if (!isPaidOrder) {
     return NextResponse.json({ received: true });
   }
 
   // Idempotency check. The event payload is a snapshot from event-creation
-  // time, so the flag must be read fresh from the PaymentIntent.
+  // time, so the flag must be read fresh from the PaymentIntent. $0 sessions
+  // have no PaymentIntent — those skip the check (a duplicate ping on
+  // redelivery beats dropping the order).
   const paymentIntentId =
     typeof session.payment_intent === "string"
       ? session.payment_intent
@@ -144,17 +168,35 @@ export async function POST(request: NextRequest) {
   }
 
   const summary = formatOrderSummary(session, lineItems);
-  // The server log is the audit trail regardless of notification config.
   console.log("[order] paid\n" + summary);
 
   const token = process.env.ORDER_TELEGRAM_BOT_TOKEN;
   const chatId = process.env.ORDER_TELEGRAM_CHAT_ID;
-  if (token && chatId) {
-    const sent = await sendTelegram(token, chatId, summary);
-    if (!sent) {
-      // Notification is configured and is the point — make Stripe retry.
-      return NextResponse.json({ error: "Retry" }, { status: 500 });
-    }
+
+  if (!token !== !chatId) {
+    // Exactly one of the pair is set — a misconfiguration, not a choice.
+    // Don't mark, so a dashboard redelivery after fixing the env re-notifies.
+    console.error(
+      "[order] Telegram misconfigured: set BOTH ORDER_TELEGRAM_BOT_TOKEN and ORDER_TELEGRAM_CHAT_ID. Order logged above but NOT notified."
+    );
+    return NextResponse.json({ received: true, notified: false });
+  }
+
+  if (!token || !chatId) {
+    // Notifications deliberately not configured. Logged above; not marked,
+    // so configuring later + manual redelivery still notifies.
+    return NextResponse.json({ received: true, notified: false });
+  }
+
+  const result = await sendTelegram(token, chatId, summary);
+  if (result === "transient-failure") {
+    // Worth retrying — never silently drop a paid order.
+    return NextResponse.json({ error: "Retry" }, { status: 500 });
+  }
+  if (result === "permanent-failure") {
+    // Retrying a dead config just risks Stripe disabling the endpoint.
+    // Logged above; fix the config, then redeliver from the dashboard.
+    return NextResponse.json({ received: true, notified: false });
   }
 
   if (paymentIntentId) {
@@ -163,10 +205,11 @@ export async function POST(request: NextRequest) {
         metadata: { [NOTIFIED_KEY]: new Date().toISOString() },
       });
     } catch (err) {
-      // Deliberate 200 despite the failure — see flow note above.
+      // Deliberate 200 despite the failure: a duplicate ping on a later
+      // redelivery beats a retry loop that re-notifies immediately.
       console.error("[order] could not mark order notified:", err);
     }
   }
 
-  return NextResponse.json({ received: true });
+  return NextResponse.json({ received: true, notified: true });
 }
