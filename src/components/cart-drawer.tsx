@@ -150,6 +150,11 @@ export function CartDrawer() {
                       <p className="text-sm text-primary font-medium mt-0.5">
                         ${item.product.price}
                       </p>
+                      {!item.product.available && (
+                        <p className="text-xs text-primary font-medium mt-1">
+                          Not available yet — remove this item to check out
+                        </p>
+                      )}
                       <div className="flex items-center gap-3 mt-2">
                         {/* Quantity */}
                         <div className="flex items-center border border-dark/10 rounded-full">

@@ -3,6 +3,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { Product, CartItem } from "./types";
+import { getProductBySlug } from "./products";
 
 interface CartState {
   items: CartItem[];
@@ -77,6 +78,24 @@ export const useCartStore = create<CartState>()(
     {
       name: "busybird-cart",
       partialize: (state) => ({ items: state.items }),
+      // Persisted carts snapshot the full Product, so image paths, prices,
+      // and availability go stale between deploys (e.g. a renamed image file
+      // would 404 in the drawer). Re-resolve each item against the live
+      // catalog on rehydrate; drop items whose slug no longer exists.
+      merge: (persisted, current) => {
+        const stored = (persisted as { items?: CartItem[] } | undefined)?.items;
+        const items = (Array.isArray(stored) ? stored : [])
+          .map((i) => {
+            const live = i?.product?.slug
+              ? getProductBySlug(i.product.slug)
+              : undefined;
+            return live && Number.isInteger(i.quantity) && i.quantity > 0
+              ? { product: live, quantity: i.quantity }
+              : null;
+          })
+          .filter((i): i is CartItem => i !== null);
+        return { ...current, items };
+      },
     }
   )
 );

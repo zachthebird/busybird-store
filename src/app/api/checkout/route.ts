@@ -51,7 +51,11 @@ export async function POST(request: NextRequest) {
     const quantity = Number.isInteger(item?.quantity) ? item.quantity : 0;
     if (!product || !product.available) {
       return NextResponse.json(
-        { error: "Your cart contains an item that isn't available." },
+        {
+          error: product
+            ? `"${product.name}" isn't available yet — please remove it from your cart.`
+            : "Your cart contains an item that isn't available.",
+        },
         { status: 400 }
       );
     }
