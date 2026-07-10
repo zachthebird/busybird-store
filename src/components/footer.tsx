@@ -14,6 +14,7 @@ const footerLinks = {
     title: "About",
     links: [
       { label: "Our Story", href: "/about" },
+      { label: "Journal", href: "/blog" },
       { label: "Contact", href: "/contact" },
     ],
   },

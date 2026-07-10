@@ -28,6 +28,12 @@ export function Header() {
             Shop
           </Link>
           <Link
+            href="/blog"
+            className="text-sm font-medium text-dark/70 hover:text-primary transition-colors"
+          >
+            Journal
+          </Link>
+          <Link
             href="/about"
             className="text-sm font-medium text-dark/70 hover:text-primary transition-colors"
           >
