@@ -25,6 +25,7 @@ export async function generateMetadata({
   return {
     title: product.name,
     description: product.description,
+    alternates: { canonical: `/products/${product.slug}` },
     openGraph: {
       title: product.name,
       description: product.description,
@@ -54,15 +55,43 @@ export default async function ProductPage({ params }: ProductPageProps) {
     image: `${SITE_URL}${product.image}`,
     description: product.description,
     brand: { "@type": "Brand", name: "BusyBird" },
+    sku: product.slug,
+    itemCondition: "https://schema.org/NewCondition",
     offers: {
       "@type": "Offer",
       price: product.price.toFixed(2),
       priceCurrency: "USD",
+      // OutOfStock, not PreOrder: Coming Soon items have no purchase path
+      // (disabled button, checkout rejects them), and PreOrder asserts the
+      // item can be ordered now — a structured-data/page mismatch Google
+      // can penalize. Switch to PreOrder only if a real preorder flow ships.
       availability: product.available
         ? "https://schema.org/InStock"
-        : "https://schema.org/PreOrder",
+        : "https://schema.org/OutOfStock",
       url: `${SITE_URL}/products/${product.slug}`,
     },
+  };
+
+  // Mirrors the visual breadcrumb below (Home → Shop → product) for a
+  // breadcrumb rich result. Absolute URLs required by schema.org.
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Shop",
+        item: `${SITE_URL}/shop`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.name,
+        item: `${SITE_URL}/products/${product.slug}`,
+      },
+    ],
   };
 
   return (
@@ -70,6 +99,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
       {/* Breadcrumb */}
       <div className="bg-neutral border-b border-dark/5">
@@ -147,8 +180,20 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 </ul>
               </div>
 
-              {/* Add to cart */}
-              <AddToCartButton product={product} />
+              {/* Add to cart (available) or Coming Soon state */}
+              {product.available ? (
+                <AddToCartButton product={product} />
+              ) : (
+                <div>
+                  <Button size="lg" disabled className="w-full sm:w-auto">
+                    Coming Soon
+                  </Button>
+                  <p className="mt-2 text-xs text-dark/40">
+                    This piece isn&apos;t available for purchase yet — check back
+                    soon.
+                  </p>
+                </div>
+              )}
 
               <Divider className="my-6" />
 

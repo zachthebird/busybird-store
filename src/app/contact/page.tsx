@@ -21,10 +21,10 @@ export default function ContactPage() {
         <div className="bg-white p-8 rounded-card border border-dark/5 inline-block">
           <p className="text-sm text-dark/40 mb-1">Email us at</p>
           <a
-            href="mailto:hello@busybird.com"
+            href="mailto:hello@busybirdaustin.com"
             className="font-heading text-xl text-primary hover:text-primary-hover transition-colors"
           >
-            hello@busybird.com
+            hello@busybirdaustin.com
           </a>
         </div>
         <p className="mt-8 text-sm text-dark/30">

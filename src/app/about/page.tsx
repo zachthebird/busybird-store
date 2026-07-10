@@ -100,10 +100,10 @@ export default function AboutPage() {
             jewelry? Drop us a line.
           </p>
           <a
-            href="mailto:hello@busybird.com"
+            href="mailto:hello@busybirdaustin.com"
             className="inline-block text-primary font-medium hover:text-primary-hover transition-colors underline underline-offset-4"
           >
-            hello@busybird.com
+            hello@busybirdaustin.com
           </a>
         </Container>
       </Section>

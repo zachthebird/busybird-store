@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "What are your earrings made of?",
-    a: "Our jewelry is 3D-printed using high-quality resin, then hand-finished with painting, sanding, and assembly. Earring posts are hypoallergenic stainless steel.",
+    a: "Our jewelry is 3D-printed using high-quality resin, then hand-finished with painting, sanding, and assembly. Earring posts and ear wires are stainless steel.",
   },
   {
     q: "How long does shipping take?",
@@ -21,7 +21,7 @@ const faqs = [
   },
   {
     q: "Can I request a custom design?",
-    a: "Absolutely — we love custom work. Email us at hello@busybird.com with your idea and we'll chat about what's possible.",
+    a: "Absolutely — we love custom work. Email us at hello@busybirdaustin.com with your idea and we'll chat about what's possible.",
   },
   {
     q: "Are your pieces waterproof?",
