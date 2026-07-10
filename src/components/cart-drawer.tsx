@@ -133,7 +133,7 @@ export function CartDrawer() {
                     <div className="relative w-20 h-20 rounded-md overflow-hidden bg-neutral/30 flex-shrink-0">
                       <Image
                         src={item.product.image}
-                        alt={item.product.name}
+                        alt={item.product.altText || item.product.name}
                         fill
                         sizes="80px"
                         className="object-cover"

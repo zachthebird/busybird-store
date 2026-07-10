@@ -129,7 +129,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <div className="relative aspect-square rounded-card overflow-hidden bg-neutral/30 border border-dark/5">
               <Image
                 src={product.image}
-                alt={product.name}
+                alt={product.altText || product.name}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
@@ -222,7 +222,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   <div className="relative aspect-square overflow-hidden bg-neutral/30">
                     <Image
                       src={p.image}
-                      alt={p.name}
+                      alt={p.altText || p.name}
                       fill
                       sizes="(max-width: 1024px) 50vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"

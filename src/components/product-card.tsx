@@ -36,7 +36,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
       <div className="relative aspect-square overflow-hidden bg-neutral/30">
         <Image
           src={product.image}
-          alt={product.name}
+          alt={product.altText || product.name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover group-hover:scale-105 transition-transform duration-500"
