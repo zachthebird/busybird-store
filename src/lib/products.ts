@@ -14,6 +14,8 @@ export const products: Product[] = [
       "Each pair is slightly unique due to hand-finishing",
     ],
     image: "/products/mahjong-tile.png",
+    altText:
+      "Mahjong Tile Earrings — 3D-printed cream resin drop earrings with embossed red Chinese character and vibrant green bamboo motifs, inspired by classic mahjong tiles",
     category: "earrings",
     inStock: true,
     available: true,
@@ -32,6 +34,8 @@ export const products: Product[] = [
       "Approximately 1.25\" drop length; each pair varies with hand-finishing",
     ],
     image: "/products/gamenight-mahjong-tile.jpg",
+    altText:
+      "Gamenight Mahjong Tile Earrings — deliberately mismatched pair of 3D-printed ivory resin tiles, one with green bamboo stalks and one with the hand-illustrated ‘one bamboo’ bird beneath a red bloom",
     category: "earrings",
     inStock: true,
     available: true,
@@ -49,6 +53,8 @@ export const products: Product[] = [
       "Inspired by Austin skyline silhouettes at dusk",
     ],
     image: "/products/terracotta-sunset.png",
+    altText:
+      "Terracotta Sunset Earrings — 3D-printed burnt orange resin teardrop earrings suspended from hammered gold-toned arches, finished with a warm Texas Hill Country sunset gradient",
     category: "earrings",
     inStock: true,
     available: false,
@@ -67,6 +73,8 @@ export const products: Product[] = [
       "Each pair has a unique iridescent pattern",
     ],
     image: "/products/grackle-wing.png",
+    altText:
+      "Grackle Wing Earrings — 3D-printed iridescent wing-shaped resin earrings with a multi-chrome finish shifting from deep purple to teal green, inspired by a grackle’s feathers in the Texas sun",
     category: "earrings",
     inStock: true,
     available: false,
@@ -85,6 +93,8 @@ export const products: Product[] = [
       "Five bluebonnet charms spaced along the chain",
     ],
     image: "/products/bluebonnet-chain.png",
+    altText:
+      "Bluebonnet Chain Necklace — 3D-printed bluebonnet flower pendant with rich blue petals and green enamel leaves on a delicate gold chain necklace, a wearable Texas spring",
     category: "necklaces",
     inStock: true,
     available: false,
@@ -103,6 +113,8 @@ export const products: Product[] = [
       "Star measures approximately 1.5\" across",
     ],
     image: "/products/lone-star-pendant.png",
+    altText:
+      "Lone Star Pendant — 3D-printed antiqued brass five-pointed star pendant with faceted ridges and a brushed matte finish, suspended on a rich dark leather cord necklace",
     category: "necklaces",
     inStock: true,
     available: false,
@@ -121,6 +133,8 @@ export const products: Product[] = [
       "Approximately 0.5\" wide at center",
     ],
     image: "/products/golden-hour-cuff.png",
+    altText:
+      "Golden Hour Cuff — 3D-printed warm gold open cuff bracelet with a hand-engraved Texas state outline and sunburst pattern radiating across a brushed brass finish",
     category: "bracelets",
     inStock: true,
     available: false,

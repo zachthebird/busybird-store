@@ -6,6 +6,8 @@ export interface Product {
   details: string[];
   image: string;
   hoverImage?: string;
+  /** Descriptive image alt text; components fall back to the product name. */
+  altText?: string;
   category: string;
   inStock: boolean;
   /** Whether this product can be purchased. Coming Soon products are not available. */
