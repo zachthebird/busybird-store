@@ -3,6 +3,7 @@ import { Playfair_Display, Inter, Caveat } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Providers } from "@/components/providers";
+import { Analytics } from "@/components/analytics";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -125,6 +126,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
