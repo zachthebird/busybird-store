@@ -18,6 +18,14 @@ const nextConfig: NextConfig = {
         destination: "/products/gamenight-mahjong-tile.jpg",
         permanent: true,
       },
+      // Grackle launch: prototype image replaced by final product photos
+      // under new names. Old URL was already ingested by Merchant Center
+      // and may live in caches/persisted carts.
+      {
+        source: "/products/grackle-wing.png",
+        destination: "/products/grackle-wing-earrings.png",
+        permanent: true,
+      },
     ];
   },
 };

@@ -125,21 +125,41 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <Section bg="white">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-            {/* Image gallery — single image for now */}
-            <div className="relative aspect-square rounded-card overflow-hidden bg-neutral/30 border border-dark/5">
-              <Image
-                src={product.image}
-                alt={product.altText || product.name}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-                priority
-              />
-              {product.badge && (
-                <div className="absolute top-4 right-4 z-10">
-                  <span className="inline-block font-accent text-xl px-5 py-2 rounded-full bg-accent-1 text-dark rotate-3 shadow-lg border-2 border-dark/10">
-                    {product.badge}
-                  </span>
+            {/* Image gallery — hero plus optional additional views */}
+            <div>
+              <div className="relative aspect-square rounded-card overflow-hidden bg-neutral/30 border border-dark/5">
+                <Image
+                  src={product.image}
+                  alt={product.altText || product.name}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                  priority
+                />
+                {product.badge && (
+                  <div className="absolute top-4 right-4 z-10">
+                    <span className="inline-block font-accent text-xl px-5 py-2 rounded-full bg-accent-1 text-dark rotate-3 shadow-lg border-2 border-dark/10">
+                      {product.badge}
+                    </span>
+                  </div>
+                )}
+              </div>
+              {product.gallery && product.gallery.length > 0 && (
+                <div className="grid grid-cols-2 gap-4 mt-4">
+                  {product.gallery.map((view) => (
+                    <div
+                      key={view.src}
+                      className="relative aspect-square rounded-card overflow-hidden bg-neutral/30 border border-dark/5"
+                    >
+                      <Image
+                        src={view.src}
+                        alt={view.alt}
+                        fill
+                        sizes="(max-width: 1024px) 50vw, 25vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
                 </div>
               )}
             </div>

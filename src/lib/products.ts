@@ -68,17 +68,26 @@ export const products: Product[] = [
       "Dramatic wing-shaped drops with an iridescent finish that shifts from deep purple to teal green — just like a grackle's feathers in the Texas sun. Bold, unexpected, and impossible to ignore.",
     details: [
       "3D-printed resin with iridescent multi-chrome finish",
-      "Stainless steel posts",
+      "Gold-tone stainless steel ear wires",
       "Approximately 2\" drop length",
       "Each pair has a unique iridescent pattern",
     ],
-    image: "/products/grackle-wing.png",
+    image: "/products/grackle-wing-earrings.png",
     altText:
-      "Grackle Wing Earrings — 3D-printed iridescent wing-shaped resin earrings with a multi-chrome finish shifting from deep purple to teal green, inspired by a grackle’s feathers in the Texas sun",
+      "Grackle Wing Earrings — 3D-printed iridescent wing-shaped resin earrings on gold-tone ear wires, with a multi-chrome finish shifting from deep purple to teal green like a grackle’s feathers in the Texas sun",
+    gallery: [
+      {
+        src: "/products/grackle-wing-earrings-styled.png",
+        alt: "Grackle Wing Earrings styled flat on a stone surface with dried flowers, showing the layered feather detail",
+      },
+      {
+        src: "/products/grackle-wing-earrings-model.png",
+        alt: "Grackle Wing Earring worn, showing the roughly 2-inch drop length and iridescent shimmer in sunlight",
+      },
+    ],
     category: "earrings",
     inStock: true,
-    available: false,
-    badge: "Coming Soon",
+    available: true,
   },
   {
     slug: "bluebonnet-chain-necklace",
