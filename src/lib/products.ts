@@ -41,20 +41,27 @@ export const products: Product[] = [
     available: true,
   },
   {
-    slug: "terracotta-sunset-earrings",
-    name: "Terracotta Sunset Earrings",
+    slug: "texas-sun-earrings",
+    name: "Texas Sun Earrings",
     price: 48,
     description:
-      "Warm orange-brown drops that capture the glow of a Texas Hill Country sunset. Hand-finished with a subtle gradient that catches the light beautifully.",
+      "A deliberately mismatched pair for the whole drive: golden hour on one ear, midnight on the other. The Texas Sun side stacks sunset waves in burnt orange under a low amber sun; the Texas Moon side answers in midnight blue and violet with a cream moon and a teal star — each with its own swinging title tag. Layered, lettered, hand-finished, and best worn with the windows down and the right record on.",
     details: [
-      "3D-printed resin with hand-applied gradient finish",
-      "Stainless steel posts",
-      "Approximately 1.5\" drop length",
-      "Inspired by Austin skyline silhouettes at dusk",
+      "Deliberately mismatched pair — sunset on one ear, moonrise on the other",
+      "Layered 3D-printed resin with raised lettering and wave relief",
+      "Hammered gold-tone stud tops with hinged title tags",
+      "Approximately 2.5\" total drop length",
+      "Named for the feeling of a westbound drive at golden hour",
     ],
-    image: "/products/terracotta-sunset.png",
+    image: "/products/texas-sun-earrings.png",
     altText:
-      "Terracotta Sunset Earrings — 3D-printed burnt orange resin teardrop earrings suspended from hammered gold-toned arches, finished with a warm Texas Hill Country sunset gradient",
+      "Texas Sun Earrings — mismatched pair of layered 3D-printed resin earrings: an arched sunset tag in burnt orange waves reading TEXAS SUN, beside its midnight-blue companion with a cream moon and teal star reading TEXAS MOON, both on hammered gold stud tops",
+    gallery: [
+      {
+        src: "/products/texas-sun-earrings-sunburst.png",
+        alt: "Alternate sculptural version of the Texas Sun pair — a scalloped burnt-orange sunburst with concentric arcs beside a midnight-blue crescent moon with a dangling teal star, hung from hammered gold arches",
+      },
+    ],
     category: "earrings",
     inStock: true,
     available: false,
