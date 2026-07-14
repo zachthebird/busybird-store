@@ -41,20 +41,21 @@ export const products: Product[] = [
     available: true,
   },
   {
-    slug: "terracotta-sunset-earrings",
-    name: "Terracotta Sunset Earrings",
+    slug: "texas-sun-earrings",
+    name: "Texas Sun Earrings",
     price: 48,
     description:
-      "Warm orange-brown drops that capture the glow of a Texas Hill Country sunset. Hand-finished with a subtle gradient that catches the light beautifully.",
+      "Burnt-orange drops that hold the last hour of a Texas evening — that slow, hazy golden light on a two-lane highway heading west. Each teardrop is hand-finished with a sun-fade gradient that glows amber when the light catches it. Best worn with the windows down and the right song on.",
     details: [
-      "3D-printed resin with hand-applied gradient finish",
+      "3D-printed resin with hand-applied sun-fade gradient",
+      "Teardrops suspended from hammered gold-tone arches",
       "Stainless steel posts",
       "Approximately 1.5\" drop length",
-      "Inspired by Austin skyline silhouettes at dusk",
+      "Named for the feeling of a westbound drive at golden hour",
     ],
-    image: "/products/terracotta-sunset.png",
+    image: "/products/texas-sun-earrings.png",
     altText:
-      "Terracotta Sunset Earrings — 3D-printed burnt orange resin teardrop earrings suspended from hammered gold-toned arches, finished with a warm Texas Hill Country sunset gradient",
+      "Texas Sun Earrings — 3D-printed burnt orange resin teardrop earrings suspended from hammered gold-tone arches, finished with a warm sun-fade gradient like a Texas golden hour",
     category: "earrings",
     inStock: true,
     available: false,
