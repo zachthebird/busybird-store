@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.4 },
     { url: `${SITE_URL}/faq`, changeFrequency: "monthly", priority: 0.4 },
     { url: `${SITE_URL}/shipping`, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${SITE_URL}/returns`, changeFrequency: "monthly", priority: 0.4 },
   ];
 
   const productPages: MetadataRoute.Sitemap = products.map((p) => ({

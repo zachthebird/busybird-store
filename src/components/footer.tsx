@@ -23,6 +23,7 @@ const footerLinks = {
     links: [
       { label: "FAQ", href: "/faq" },
       { label: "Shipping", href: "/shipping" },
+      { label: "Returns", href: "/returns" },
       { label: "Accessibility", href: "/accessibility" },
     ],
   },
