@@ -45,17 +45,23 @@ export const products: Product[] = [
     name: "Texas Sun Earrings",
     price: 48,
     description:
-      "Burnt-orange drops that hold the last hour of a Texas evening — that slow, hazy golden light on a two-lane highway heading west. Each teardrop is hand-finished with a sun-fade gradient that glows amber when the light catches it. Best worn with the windows down and the right song on.",
+      "A deliberately mismatched pair for the whole drive: golden hour on one ear, midnight on the other. The Texas Sun side stacks sunset waves in burnt orange under a low amber sun; the Texas Moon side answers in midnight blue and violet with a cream moon and a teal star — each with its own swinging title tag. Layered, lettered, hand-finished, and best worn with the windows down and the right record on.",
     details: [
-      "3D-printed resin with hand-applied sun-fade gradient",
-      "Teardrops suspended from hammered gold-tone arches",
-      "Stainless steel posts",
-      "Approximately 1.5\" drop length",
+      "Deliberately mismatched pair — sunset on one ear, moonrise on the other",
+      "Layered 3D-printed resin with raised lettering and wave relief",
+      "Hammered gold-tone stud tops with hinged title tags",
+      "Approximately 2.5\" total drop length",
       "Named for the feeling of a westbound drive at golden hour",
     ],
     image: "/products/texas-sun-earrings.png",
     altText:
-      "Texas Sun Earrings — 3D-printed burnt orange resin teardrop earrings suspended from hammered gold-tone arches, finished with a warm sun-fade gradient like a Texas golden hour",
+      "Texas Sun Earrings — mismatched pair of layered 3D-printed resin earrings: an arched sunset tag in burnt orange waves reading TEXAS SUN, beside its midnight-blue companion with a cream moon and teal star reading TEXAS MOON, both on hammered gold stud tops",
+    gallery: [
+      {
+        src: "/products/texas-sun-earrings-sunburst.png",
+        alt: "Alternate sculptural version of the Texas Sun pair — a scalloped burnt-orange sunburst with concentric arcs beside a midnight-blue crescent moon with a dangling teal star, hung from hammered gold arches",
+      },
+    ],
     category: "earrings",
     inStock: true,
     available: false,
