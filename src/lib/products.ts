@@ -162,10 +162,11 @@ export const products: Product[] = [
   },
 
   // ---------------------------------------------------------------------
-  // PLACEHOLDER LISTINGS (added July 2026). Images are generated "photo
-  // coming soon" cards — swap for real product photos 1:1 at the same path.
-  // Prices and physical details (drop lengths, finishes) are provisional;
-  // maker confirms both before flipping `available: true`.
+  // JULY 2026 EXPANSION. Entries flagged `hidden: true` (here and above)
+  // are deprecated from the storefront pending production — several still
+  // carry generated "photo coming soon" placeholder images, and their
+  // prices and physical details are provisional. Confirm both with the
+  // maker before relaunching one (hidden: false, available: true).
   // ---------------------------------------------------------------------
   {
     slug: "gecko-dangle-earrings",
