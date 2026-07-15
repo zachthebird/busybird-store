@@ -65,6 +65,7 @@ export const products: Product[] = [
     category: "earrings",
     inStock: true,
     available: false,
+    hidden: true,
     badge: "Coming Soon",
   },
   {
@@ -114,6 +115,7 @@ export const products: Product[] = [
     category: "necklaces",
     inStock: true,
     available: false,
+    hidden: true,
     badge: "Coming Soon",
   },
   {
@@ -134,6 +136,7 @@ export const products: Product[] = [
     category: "necklaces",
     inStock: true,
     available: false,
+    hidden: true,
     badge: "Coming Soon",
   },
   {
@@ -154,6 +157,7 @@ export const products: Product[] = [
     category: "bracelets",
     inStock: true,
     available: false,
+    hidden: true,
     badge: "Coming Soon",
   },
 
@@ -179,6 +183,7 @@ export const products: Product[] = [
     category: "earrings",
     inStock: true,
     available: false,
+    hidden: true,
     badge: "Coming Soon",
   },
   {
@@ -197,6 +202,7 @@ export const products: Product[] = [
     category: "earrings",
     inStock: true,
     available: false,
+    hidden: true,
     badge: "Coming Soon",
   },
   {
@@ -215,6 +221,7 @@ export const products: Product[] = [
     category: "earrings",
     inStock: true,
     available: false,
+    hidden: true,
     badge: "Coming Soon",
   },
   {
@@ -222,36 +229,61 @@ export const products: Product[] = [
     name: "Prickly Pear Cactus Earrings",
     price: 35,
     description:
-      "Texas's favorite cactus, minus the spines that hurt. Green prickly pear paddles topped with a hot-pink bloom, 3D-printed in resin and hand-painted — a little desert garden that goes with denim, dresses, and everything between.",
+      "Texas's favorite cactus, minus the spines. Two green prickly pear paddles — dimpled just like the real thing — stack beneath a sculpted hot-pink bloom, 3D-printed in resin with a soft matte finish. A little desert garden that goes with denim, dresses, and everything in between.",
     details: [
-      "3D-printed resin with hand-painted paddle and bloom details",
+      "Layered 3D-printed resin with a soft matte finish",
+      "Sculpted hot-pink prickly pear bloom",
       "Stainless steel ear wires",
-      "Approximately 1.5\" drop length",
+      "Approximately 2.25\" drop length",
       "Each pair varies slightly with hand-finishing",
     ],
     image: "/products/prickly-pear-cactus-earrings.png",
+    altText:
+      "Prickly Pear Cactus Earrings — two stacked green 3D-printed prickly pear paddles with dimpled texture, topped with a sculpted hot-pink bloom",
+    gallery: [
+      {
+        src: "/products/prickly-pear-cactus-earrings-styled.png",
+        alt: "Prickly Pear Cactus Earrings arranged on sun-washed stone beside dried grasses, showing the dimpled paddle texture and layered pink bloom",
+      },
+      {
+        src: "/products/prickly-pear-cactus-earrings-model.png",
+        alt: "Prickly Pear Cactus Earring worn, showing the roughly 2.25-inch drop against a Hill Country sunset",
+      },
+    ],
     category: "earrings",
     inStock: true,
-    available: false,
-    badge: "Coming Soon",
+    available: true,
+    badge: "New",
   },
   {
     slug: "candy-corn-earrings",
     name: "Candy Corn Earrings",
     price: 35,
     description:
-      "The most argued-about candy in America, now in earring form. Classic tri-color stripes, 3D-printed in resin with a soft glossy finish — sweet enough for October, divisive enough to be fun year-round.",
+      "The most argued-about candy in America, now in earring form. Oversized kernels in the classic cream, orange, and yellow stripes, 3D-printed in resin with a soft matte finish — sweet enough for October, divisive enough to be fun year-round.",
     details: [
-      "3D-printed resin with hand-painted tri-color stripes",
+      "3D-printed resin in classic tri-color stripes",
       "Stainless steel ear wires",
-      "Approximately 1\" drop length",
+      "Approximately 1.5\" drop length",
       "Part of the BusyBird Halloween collection",
     ],
     image: "/products/candy-corn-earrings.png",
+    altText:
+      "Candy Corn Earrings — 3D-printed resin drop earrings shaped like oversized candy corn kernels with cream, orange, and yellow stripes",
+    gallery: [
+      {
+        src: "/products/candy-corn-earrings-styled.png",
+        alt: "Candy Corn Earrings laid on warm sandstone with dried florals, showing the rounded kernel shape and crisp stripe transitions",
+      },
+      {
+        src: "/products/candy-corn-earrings-model.png",
+        alt: "Candy Corn Earring worn, showing the roughly 1.5-inch drop in golden evening light",
+      },
+    ],
     category: "earrings",
     inStock: true,
-    available: false,
-    badge: "Coming Soon",
+    available: true,
+    badge: "New",
   },
   {
     slug: "ghost-earrings",
@@ -269,6 +301,7 @@ export const products: Product[] = [
     category: "earrings",
     inStock: true,
     available: false,
+    hidden: true,
     badge: "Coming Soon",
   },
   {
@@ -302,16 +335,24 @@ export const products: Product[] = [
     category: "earrings",
     inStock: true,
     available: false,
+    hidden: true,
     badge: "Coming Soon",
   },
 ];
+
+/**
+ * The storefront catalog: what grids, featured sections, related items, and
+ * the sitemap render. Hidden (deprecated) products stay in `products` so
+ * their slugs still resolve for persisted carts and an easy relaunch.
+ */
+export const visibleProducts = products.filter((p) => !p.hidden);
 
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
 }
 
 export function getProductsByCategory(category: string): Product[] {
-  return products.filter((p) => p.category === category);
+  return visibleProducts.filter((p) => p.category === category);
 }
 
 export const categories = [

@@ -1,13 +1,19 @@
 import Link from "next/link";
+import { categories, visibleProducts } from "@/lib/products";
 
 const footerLinks = {
   shop: {
     title: "Shop",
+    // Category links follow the storefront: deprecated lines with no visible
+    // products drop out rather than pointing at an empty shop view.
     links: [
       { label: "All Products", href: "/shop" },
-      { label: "Earrings", href: "/shop?category=earrings" },
-      { label: "Necklaces", href: "/shop?category=necklaces" },
-      { label: "Bracelets", href: "/shop?category=bracelets" },
+      ...categories
+        .filter((cat) => visibleProducts.some((p) => p.category === cat.slug))
+        .map((cat) => ({
+          label: cat.name,
+          href: `/shop?category=${cat.slug}`,
+        })),
     ],
   },
   about: {

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProductBySlug, products } from "@/lib/products";
+import { getProductBySlug, visibleProducts } from "@/lib/products";
 import { Heading, Container, Section, Divider } from "@/components/ui";
 import { Button } from "@/components/button";
 import { AddToCartButton } from "./add-to-cart-button";
@@ -12,7 +12,7 @@ interface ProductPageProps {
 }
 
 export async function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
+  return visibleProducts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -20,7 +20,8 @@ export async function generateMetadata({
 }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
   const product = getProductBySlug(slug);
-  if (!product) return { title: "Product Not Found" };
+  // Hidden (deprecated) products 404 — same treatment as unknown slugs.
+  if (!product || product.hidden) return { title: "Product Not Found" };
 
   return {
     title: product.name,
@@ -41,10 +42,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
 
-  if (!product) notFound();
+  if (!product || product.hidden) notFound();
 
   // Find related products (same category, excluding current)
-  const related = products
+  const related = visibleProducts
     .filter((p) => p.category === product.category && p.slug !== product.slug)
     .slice(0, 3);
 
