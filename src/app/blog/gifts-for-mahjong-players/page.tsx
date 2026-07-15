@@ -10,8 +10,10 @@ import { PostJsonLd } from "../post-jsonld";
 const post = getPostBySlug("gifts-for-mahjong-players")!;
 
 // Pull live catalog data so names, prices, images, and availability never
-// drift from the shop.
+// drift from the shop. Retired slugs stay listed here — the available
+// filter drops them, so the guide always shows the current mahjong lineup.
 const mahjongPicks = [
+  getProductBySlug("joker-tile-earrings"),
   getProductBySlug("mahjong-tile-earrings"),
   getProductBySlug("gamenight-mahjong-tile-earrings"),
 ].filter((p): p is Product => p !== undefined && p.available);
@@ -62,9 +64,9 @@ export default function MahjongGiftGuidePage() {
               </Heading>
               <p className="mb-6">
                 The best mahjong gifts nod to the game without being a
-                novelty. Full disclosure: these two are ours — 3D-printed
-                resin tiles, hand-painted, with stainless steel findings,
-                made to order in Austin.
+                novelty. Full disclosure: the earrings below are ours —
+                3D-printed resin tiles with stainless steel findings, made to
+                order in Austin.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

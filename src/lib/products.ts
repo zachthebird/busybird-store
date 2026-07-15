@@ -2,6 +2,38 @@ import { Product } from "./types";
 
 export const products: Product[] = [
   {
+    slug: "joker-tile-earrings",
+    name: "Mahjong Joker Tile Earrings",
+    price: 36,
+    // Consolidates the two original mahjong listings (both hidden below;
+    // their old URLs 308 here via next.config.ts).
+    description:
+      "The tile every seat at the table is hoping for. A matched pair of jokers in creamy 3D-printed resin — red lettering arched over the green dragon medallion in its blue ring — hung from stainless steel ear wires. Wear the wild cards and let your luck know it's optional.",
+    details: [
+      "3D-printed resin tiles with crisp red, green, and blue detailing",
+      "Stainless steel ear wires",
+      "Approximately 1.5\" tile drop",
+      "Each pair is slightly unique due to hand-finishing",
+    ],
+    image: "/products/joker-tile-earrings.png",
+    altText:
+      "Mahjong Joker Tile Earrings — 3D-printed cream resin mahjong joker tiles with red JOKER lettering above a green dragon medallion in a blue ring, on silver-tone stainless steel ear wires",
+    gallery: [
+      {
+        src: "/products/joker-tile-earrings-styled.png",
+        alt: "Mahjong Joker Tile Earrings laid on warm sandstone with dried florals, showing the crisp red JOKER lettering and green dragon medallion",
+      },
+      {
+        src: "/products/joker-tile-earrings-model.png",
+        alt: "Mahjong Joker Tile Earring worn, showing the roughly 1.5-inch tile in golden evening light",
+      },
+    ],
+    category: "earrings",
+    inStock: true,
+    available: true,
+    badge: "New",
+  },
+  {
     slug: "mahjong-tile-earrings",
     name: "Mahjong Tile Earrings",
     price: 36,
@@ -18,8 +50,10 @@ export const products: Product[] = [
       "Mahjong Tile Earrings — 3D-printed cream resin drop earrings with embossed red Chinese character and vibrant green bamboo motifs, inspired by classic mahjong tiles",
     category: "earrings",
     inStock: true,
-    available: true,
-    // No badge — this is the only currently available product
+    // Retired July 2026: consolidated into joker-tile-earrings (old URL 308s
+    // there). Entry kept for persisted-cart slug resolution.
+    available: false,
+    hidden: true,
   },
   {
     slug: "gamenight-mahjong-tile-earrings",
@@ -38,7 +72,10 @@ export const products: Product[] = [
       "Gamenight Mahjong Tile Earrings — deliberately mismatched pair of 3D-printed ivory resin tiles, one with green bamboo stalks and one with the hand-illustrated ‘one bamboo’ bird beneath a red bloom",
     category: "earrings",
     inStock: true,
-    available: true,
+    // Retired July 2026: consolidated into joker-tile-earrings (old URL 308s
+    // there). Entry kept for persisted-cart slug resolution.
+    available: false,
+    hidden: true,
   },
   {
     slug: "texas-sun-earrings",
