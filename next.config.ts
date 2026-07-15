@@ -39,6 +39,20 @@ const nextConfig: NextConfig = {
         destination: "/products/texas-sun-earrings.png",
         permanent: true,
       },
+      // July 2026 consolidation: the two original mahjong listings merged
+      // into the single joker-tile listing. These are the store's oldest
+      // indexed product URLs (sitemap day one, Merchant Center, backlinks),
+      // so they forward rather than 404.
+      {
+        source: "/products/mahjong-tile-earrings",
+        destination: "/products/joker-tile-earrings",
+        permanent: true,
+      },
+      {
+        source: "/products/gamenight-mahjong-tile-earrings",
+        destination: "/products/joker-tile-earrings",
+        permanent: true,
+      },
     ];
   },
 };
