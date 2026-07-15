@@ -274,21 +274,21 @@ export const products: Product[] = [
   {
     slug: "austin-bat-earrings",
     name: "Austin Bat Earrings",
-    price: 35,
-    // Final design renders in place; confirm price + wingspan at production,
-    // then flip available.
+    price: 44,
+    // Renders show gold hooks; the physical piece ships on stainless wires.
+    // Flip available when production wraps (~mid-Aug target).
     description:
       "Every evening in summer, over a million bats pour out from under the Congress Avenue Bridge — Austin's spookiest and most beloved residents. These are theirs: wing-spread bats in deep midnight resin, each wing built from layered, veined segments with a whisper of purple at the tips. Halloween for everyone else — hometown pride for us.",
     details: [
       "3D-printed resin in deep midnight with a subtle purple sheen at the wing tips",
       "Layered, veined wing segments with hand-finished edges",
-      "Gold-tone stainless steel ear wires",
+      "Stainless steel ear wires",
       "Approximately 2.5\" wingspan",
       "Part of the BusyBird Halloween collection — and Austin canon",
     ],
     image: "/products/austin-bat-earrings.png",
     altText:
-      "Austin Bat Earrings — wing-spread bats in deep midnight 3D-printed resin with layered, veined wing segments and a subtle purple sheen at the tips, on gold-tone ear wires",
+      "Austin Bat Earrings — wing-spread bats in deep midnight 3D-printed resin with layered, veined wing segments and a subtle purple sheen at the tips",
     gallery: [
       {
         src: "/products/austin-bat-earrings-styled.png",
