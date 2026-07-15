@@ -275,15 +275,30 @@ export const products: Product[] = [
     slug: "austin-bat-earrings",
     name: "Austin Bat Earrings",
     price: 35,
+    // Final design renders in place; confirm price + wingspan at production,
+    // then flip available.
     description:
-      "Every evening in summer, over a million bats pour out from under the Congress Avenue Bridge — Austin's spookiest and most beloved residents. Wing-spread silhouettes in deep midnight resin: Halloween for everyone else, hometown pride for us.",
+      "Every evening in summer, over a million bats pour out from under the Congress Avenue Bridge — Austin's spookiest and most beloved residents. These are theirs: wing-spread bats in deep midnight resin, each wing built from layered, veined segments with a whisper of purple at the tips. Halloween for everyone else — hometown pride for us.",
     details: [
-      "3D-printed resin in a deep midnight finish",
-      "Stainless steel ear wires",
-      "Approximately 1.5\" wingspan",
+      "3D-printed resin in deep midnight with a subtle purple sheen at the wing tips",
+      "Layered, veined wing segments with hand-finished edges",
+      "Gold-tone stainless steel ear wires",
+      "Approximately 2.5\" wingspan",
       "Part of the BusyBird Halloween collection — and Austin canon",
     ],
     image: "/products/austin-bat-earrings.png",
+    altText:
+      "Austin Bat Earrings — wing-spread bats in deep midnight 3D-printed resin with layered, veined wing segments and a subtle purple sheen at the tips, on gold-tone ear wires",
+    gallery: [
+      {
+        src: "/products/austin-bat-earrings-styled.png",
+        alt: "Austin Bat Earrings arranged on warm stone beside dried grass in dusk light, showing the layered wing detail and purple sheen",
+      },
+      {
+        src: "/products/austin-bat-earrings-model.png",
+        alt: "Austin Bat Earring worn, showing the roughly 2.5-inch wingspan in golden evening light",
+      },
+    ],
     category: "earrings",
     inStock: true,
     available: false,
