@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { products } from "@/lib/products";
+import { visibleProducts } from "@/lib/products";
 import { posts } from "@/lib/posts";
 
 const SITE_URL =
@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/returns`, changeFrequency: "monthly", priority: 0.4 },
   ];
 
-  const productPages: MetadataRoute.Sitemap = products.map((p) => ({
+  const productPages: MetadataRoute.Sitemap = visibleProducts.map((p) => ({
     url: `${SITE_URL}/products/${p.slug}`,
     changeFrequency: "weekly",
     priority: 0.8,

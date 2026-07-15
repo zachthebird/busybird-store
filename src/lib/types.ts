@@ -14,6 +14,12 @@ export interface Product {
   inStock: boolean;
   /** Whether this product can be purchased. Coming Soon products are not available. */
   available: boolean;
+  /**
+   * Deprecated from the storefront: excluded from grids, featured, related,
+   * and the sitemap; the product page 404s. Entry is kept (not deleted) so
+   * relaunching is a one-word flip and persisted carts still resolve slugs.
+   */
+  hidden?: boolean;
   badge?: string;
 }
 

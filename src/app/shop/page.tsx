@@ -1,4 +1,4 @@
-import { products, categories } from "@/lib/products";
+import { visibleProducts, categories } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
 import { Heading, Container, Badge } from "@/components/ui";
 
@@ -16,12 +16,17 @@ export default function ShopPage() {
             Small-batch, playful, and made with love.
           </p>
 
-          {/* Category filter buttons */}
+          {/* Category filter buttons — only categories that currently have
+              visible products, so deprecated lines don't leave empty chips */}
           <div className="flex flex-wrap gap-2 mt-6">
             <Badge variant="accent">All</Badge>
-            {categories.map((cat) => (
-              <Badge key={cat.slug}>{cat.name}</Badge>
-            ))}
+            {categories
+              .filter((cat) =>
+                visibleProducts.some((p) => p.category === cat.slug)
+              )
+              .map((cat) => (
+                <Badge key={cat.slug}>{cat.name}</Badge>
+              ))}
           </div>
         </Container>
       </section>
@@ -29,13 +34,13 @@ export default function ShopPage() {
       {/* Product grid */}
       <section className="section-padding bg-white">
         <Container>
-          {products.length === 0 ? (
+          {visibleProducts.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-dark/30 text-lg">No products yet — check back soon!</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product) => (
+              {visibleProducts.map((product) => (
                 <ProductCard key={product.slug} product={product} />
               ))}
             </div>

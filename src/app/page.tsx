@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { products } from "@/lib/products";
+import { visibleProducts } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
 import { Heading, Container } from "@/components/ui";
 import { Button } from "@/components/button";
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const featured = products.slice(0, 4);
+  const featured = visibleProducts.slice(0, 4);
 
   return (
     <>
