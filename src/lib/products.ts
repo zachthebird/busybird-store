@@ -98,6 +98,37 @@ export const products: Product[] = [
     available: true,
   },
   {
+    slug: "texas-red-white-blue-earrings",
+    name: "Red, White & Blue Texas Earrings",
+    price: 38,
+    description:
+      "The whole state, flying its own colors. A Texas silhouette color-blocked like the Lone Star flag — deep blue behind a raised white star, cream and red riding east — 3D-printed in resin with a subtle contour texture that reads like a topographic map. The gold hooks thread straight through the Panhandle: no chain, no fuss, just Texas.",
+    details: [
+      "3D-printed resin color-blocked like the Texas flag, with a raised lone star",
+      "Subtle contoured print texture, like a topographic map",
+      "Gold-tone stainless steel ear wires, attached directly through the Panhandle",
+      "Approximately 1.75\" across",
+      "Each pair varies slightly with hand-finishing",
+    ],
+    image: "/products/texas-red-white-blue-earrings.png",
+    altText:
+      "Red, White & Blue Texas Earrings — 3D-printed resin Texas silhouettes color-blocked like the state flag, deep blue with a raised white star beside cream and red panels, on gold-tone ear wires threaded directly through the Panhandle",
+    gallery: [
+      {
+        src: "/products/texas-red-white-blue-earrings-styled.png",
+        alt: "Red, White & Blue Texas Earrings laid on warm limestone with dried florals, showing the contoured print texture and raised star",
+      },
+      {
+        src: "/products/texas-red-white-blue-earrings-model.png",
+        alt: "Red, White & Blue Texas Earring worn, showing the roughly 1.75-inch Texas silhouette in golden evening light",
+      },
+    ],
+    category: "earrings",
+    inStock: true,
+    available: true,
+    badge: "New",
+  },
+  {
     slug: "bluebonnet-chain-necklace",
     name: "Bluebonnet Chain Necklace",
     price: 72,
