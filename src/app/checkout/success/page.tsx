@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Stripe from "stripe";
 import { Container, Section, Heading } from "@/components/ui";
 import { ClearCartOnArrival } from "./clear-cart";
+import { PurchaseTracker } from "./purchase-tracker";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -16,19 +17,26 @@ interface SuccessPageProps {
 // Ask Stripe whether this session was actually paid. A hand-crafted
 // ?session_id= can't fake a confirmation, and a genuine-but-unpaid/expired
 // session won't either. Any error falls back to "not paid" (never throws).
-async function getPaymentStatus(
-  sessionId: string | undefined
-): Promise<{ paid: boolean; ref: string | null }> {
-  if (!sessionId) return { paid: false, ref: null };
+async function getPaymentStatus(sessionId: string | undefined): Promise<{
+  paid: boolean;
+  ref: string | null;
+  totalUsd: number;
+}> {
+  if (!sessionId) return { paid: false, ref: null, totalUsd: 0 };
   const key = process.env.STRIPE_SECRET_KEY;
-  if (!key || key.includes("placeholder")) return { paid: false, ref: null };
+  if (!key || key.includes("placeholder"))
+    return { paid: false, ref: null, totalUsd: 0 };
   try {
     const stripe = new Stripe(key);
     const session = await stripe.checkout.sessions.retrieve(sessionId);
     const paid = session.payment_status === "paid";
-    return { paid, ref: paid ? sessionId.slice(-8).toUpperCase() : null };
+    return {
+      paid,
+      ref: paid ? sessionId.slice(-8).toUpperCase() : null,
+      totalUsd: (session.amount_total ?? 0) / 100,
+    };
   } catch {
-    return { paid: false, ref: null };
+    return { paid: false, ref: null, totalUsd: 0 };
   }
 }
 
@@ -36,7 +44,7 @@ export default async function CheckoutSuccessPage({
   searchParams,
 }: SuccessPageProps) {
   const { session_id } = await searchParams;
-  const { paid, ref } = await getPaymentStatus(session_id);
+  const { paid, ref, totalUsd } = await getPaymentStatus(session_id);
 
   return (
     <Section bg="white">
@@ -74,6 +82,15 @@ export default async function CheckoutSuccessPage({
         </div>
         {/* Only clear the cart once Stripe confirms the payment succeeded. */}
         {paid && <ClearCartOnArrival />}
+        {/* GA4 purchase — server-verified paid sessions only, deduped per
+            session id inside the tracker. */}
+        {paid && session_id && (
+          <PurchaseTracker
+            sessionId={session_id}
+            value={totalUsd}
+            currency="USD"
+          />
+        )}
       </Container>
     </Section>
   );

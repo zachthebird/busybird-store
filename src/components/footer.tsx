@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { categories, visibleProducts } from "@/lib/products";
+import { NewsletterForm } from "./newsletter-form";
 
 const footerLinks = {
   shop: {
@@ -122,6 +123,17 @@ export function Footer() {
               ))}
             </ul>
           </div>
+        </div>
+
+        {/* Newsletter capture */}
+        <div className="mt-12 pt-8 border-t border-white/10 max-w-md">
+          <h3 className="font-heading text-sm font-semibold uppercase tracking-wider mb-2 text-white/60">
+            Join the flock
+          </h3>
+          <p className="text-sm text-neutral/50 mb-4">
+            First dibs on new drops from the studio. No spam, easy out.
+          </p>
+          <NewsletterForm />
         </div>
 
         {/* Bottom bar */}

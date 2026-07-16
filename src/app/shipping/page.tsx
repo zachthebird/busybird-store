@@ -23,7 +23,7 @@ export default function ShippingPage() {
 
           <div className="bg-white p-6 rounded-card border border-dark/5">
             <h3 className="font-heading font-semibold text-dark mb-2">Domestic Shipping (US)</h3>
-            <p>Standard shipping (5-7 business days): $4.95 or FREE on orders over $75. Express shipping (2-3 business days): $14.95.</p>
+            <p>Standard shipping (5-7 business days): $4.95 or FREE on orders over $60. Express shipping (2-3 business days): $14.95.</p>
           </div>
 
           <div className="bg-white p-6 rounded-card border border-dark/5">

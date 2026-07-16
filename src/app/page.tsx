@@ -150,7 +150,7 @@ export default function HomePage() {
             Handcrafted just for you
           </Heading>
           <p className="text-neutral/50 mb-8">
-            Free shipping on orders over $75. Each piece is made to order in
+            Free shipping on orders over $60. Each piece is made to order in
             3-5 business days.
           </p>
           <Link href="/shop">

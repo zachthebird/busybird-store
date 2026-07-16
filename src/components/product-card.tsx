@@ -7,6 +7,7 @@ import type { Product } from "@/lib/types";
 import { toast } from "./toast";
 import { useCartStore } from "@/lib/cart";
 import { Button } from "./button";
+import { trackAddToCart } from "@/lib/gtag";
 
 interface ProductCardProps {
   product: Product;
@@ -24,6 +25,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
     e.preventDefault();
     e.stopPropagation();
     addItem(product);
+    trackAddToCart(product);
     toast(`Added "${product.name}" to cart`);
   };
 

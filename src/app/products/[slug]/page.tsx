@@ -6,6 +6,7 @@ import { getProductBySlug, visibleProducts } from "@/lib/products";
 import { Heading, Container, Section, Divider } from "@/components/ui";
 import { Button } from "@/components/button";
 import { AddToCartButton } from "./add-to-cart-button";
+import { ViewItemTracker } from "./view-item-tracker";
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
@@ -105,6 +106,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
+      <ViewItemTracker product={product} />
       {/* Breadcrumb */}
       <div className="bg-neutral border-b border-dark/5">
         <Container>
@@ -220,7 +222,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
               {/* Shipping note */}
               <p className="text-xs text-dark/30">
-                Free shipping on orders over $75. Made to order — ships in 3-5
+                Free shipping on orders over $60. Made to order — ships in 3-5
                 business days.
               </p>
             </div>

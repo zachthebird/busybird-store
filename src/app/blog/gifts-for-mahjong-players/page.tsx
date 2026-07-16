@@ -146,7 +146,7 @@ export default function MahjongGiftGuidePage() {
                 before it ships, plus 5&ndash;7 business days for standard US
                 shipping. Translation: order about three weeks before you
                 need it, and earlier around holidays. Standard shipping is free on
-                orders over $75, and the fine print lives on our{" "}
+                orders over $60, and the fine print lives on our{" "}
                 <Link
                   href="/shipping"
                   className="text-primary hover:text-primary-hover underline underline-offset-4"
