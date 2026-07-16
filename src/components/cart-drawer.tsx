@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useCartStore } from "@/lib/cart";
 import { Button } from "./button";
 import { toast } from "./toast";
+import { trackBeginCheckout } from "@/lib/gtag";
 
 export function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, updateQuantity, subtotal } =
@@ -14,6 +15,7 @@ export function CartDrawer() {
 
   const handleCheckout = async () => {
     setCheckingOut(true);
+    trackBeginCheckout(items, subtotal());
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",

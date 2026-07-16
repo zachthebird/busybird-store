@@ -4,6 +4,7 @@ import type { Product } from "@/lib/types";
 import { useCartStore } from "@/lib/cart";
 import { Button } from "@/components/button";
 import { toast } from "@/components/toast";
+import { trackAddToCart } from "@/lib/gtag";
 
 interface AddToCartButtonProps {
   product: Product;
@@ -14,6 +15,7 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
 
   const handleAdd = () => {
     addItem(product);
+    trackAddToCart(product);
     toast(`Added "${product.name}" to cart`);
   };
 

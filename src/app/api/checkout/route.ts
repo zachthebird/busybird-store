@@ -12,7 +12,11 @@ const SITE_URL =
 // Ship US-only until per-country rate logic exists; keep /shipping in sync.
 const STANDARD_SHIPPING_CENTS = 495;
 const EXPRESS_SHIPPING_CENTS = 1495;
-const FREE_SHIPPING_THRESHOLD_CENTS = 7500;
+// Lowered from $75 on 2026-07-15 (owner call): the old threshold sat above
+// 2x AOV, so it motivated nobody. Merchant Center's shipping config still
+// says free-over-$75 — charging LESS than configured is policy-safe, but
+// update MC to match when next in the dashboard.
+const FREE_SHIPPING_THRESHOLD_CENTS = 6000;
 
 const MAX_QUANTITY_PER_ITEM = 20;
 const MAX_CART_LINES = 50;
@@ -97,7 +101,7 @@ export async function POST(request: NextRequest) {
           shipping_rate_data: {
             type: "fixed_amount",
             display_name: freeStandard
-              ? "Standard US shipping — free over $75"
+              ? "Standard US shipping — free over $60"
               : "Standard US shipping",
             fixed_amount: {
               amount: freeStandard ? 0 : STANDARD_SHIPPING_CENTS,
