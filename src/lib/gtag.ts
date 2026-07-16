@@ -10,11 +10,19 @@ function gtag(): GtagFn | undefined {
   return (window as unknown as { gtag?: GtagFn }).gtag;
 }
 
+/**
+ * Fire a GA4 event. Returns whether it was actually dispatched, so callers
+ * with once-only semantics (the purchase dedupe) can retry on a later
+ * visit instead of permanently marking a never-sent event as sent.
+ */
 export function trackEvent(
   name: string,
   params: Record<string, unknown> = {}
-): void {
-  gtag()?.("event", name, params);
+): boolean {
+  const g = gtag();
+  if (!g) return false;
+  g("event", name, params);
+  return true;
 }
 
 export function productToGaItem(product: Product, quantity = 1) {

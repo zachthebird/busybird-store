@@ -7,6 +7,7 @@ type FormState = "idle" | "sending" | "done" | "error";
 
 export function NewsletterForm() {
   const [email, setEmail] = useState("");
+  const [nickname, setNickname] = useState(""); // honeypot — humans never see it
   const [state, setState] = useState<FormState>("idle");
   const [message, setMessage] = useState("");
 
@@ -18,7 +19,7 @@ export function NewsletterForm() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, nickname }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
@@ -44,6 +45,20 @@ export function NewsletterForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-2">
+      {/* Honeypot: visually removed and out of the tab order; bots that
+          auto-fill every field trip the server-side check. */}
+      <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+        <label htmlFor="newsletter-nickname">Leave this field empty</label>
+        <input
+          id="newsletter-nickname"
+          name="nickname"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={nickname}
+          onChange={(e) => setNickname(e.target.value)}
+        />
+      </div>
       <div className="flex gap-2">
         <label htmlFor="newsletter-email" className="sr-only">
           Email address
@@ -67,7 +82,9 @@ export function NewsletterForm() {
         </button>
       </div>
       {state === "error" && (
-        <p className="text-xs text-primary">{message}</p>
+        // accent-1 (warm gold) clears WCAG AA contrast on the dark footer;
+        // the terracotta primary lands ~3.4:1 there.
+        <p className="text-xs text-accent-1">{message}</p>
       )}
     </form>
   );

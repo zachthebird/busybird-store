@@ -26,7 +26,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: true });
   }
 
-  const email = typeof body.email === "string" ? body.email.trim() : "";
+  // Lowercase so case variants dedupe to one customer record — Stripe's
+  // customers.list email filter is a case-sensitive exact match.
+  const email =
+    typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
   // Light shape check — Stripe validates for real on its side.
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 254) {
     return NextResponse.json(

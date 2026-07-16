@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Stripe from "stripe";
 import { Container, Section, Heading } from "@/components/ui";
 import { ClearCartOnArrival } from "./clear-cart";
-import { PurchaseTracker } from "./purchase-tracker";
+import { PurchaseTracker, type PurchaseItem } from "./purchase-tracker";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -21,22 +21,44 @@ async function getPaymentStatus(sessionId: string | undefined): Promise<{
   paid: boolean;
   ref: string | null;
   totalUsd: number;
+  items: PurchaseItem[];
 }> {
-  if (!sessionId) return { paid: false, ref: null, totalUsd: 0 };
+  const empty = { paid: false, ref: null, totalUsd: 0, items: [] };
+  if (!sessionId) return empty;
   const key = process.env.STRIPE_SECRET_KEY;
-  if (!key || key.includes("placeholder"))
-    return { paid: false, ref: null, totalUsd: 0 };
+  if (!key || key.includes("placeholder")) return empty;
   try {
     const stripe = new Stripe(key);
-    const session = await stripe.checkout.sessions.retrieve(sessionId);
+    const session = await stripe.checkout.sessions.retrieve(sessionId, {
+      // Line items feed the GA4 purchase items[] — the checkout route
+      // stores our catalog slug in product_data.metadata.slug, giving
+      // item_id parity with view_item/add_to_cart/begin_checkout.
+      expand: ["line_items.data.price.product"],
+    });
     const paid = session.payment_status === "paid";
+    const items: PurchaseItem[] = (session.line_items?.data ?? []).map(
+      (li) => {
+        const prod = li.price?.product;
+        const slug =
+          prod && typeof prod === "object" && !("deleted" in prod)
+            ? prod.metadata?.slug
+            : undefined;
+        return {
+          item_id: slug ?? li.description ?? "unknown",
+          item_name: li.description ?? slug ?? "Unknown item",
+          price: (li.price?.unit_amount ?? 0) / 100,
+          quantity: li.quantity ?? 1,
+        };
+      }
+    );
     return {
       paid,
       ref: paid ? sessionId.slice(-8).toUpperCase() : null,
       totalUsd: (session.amount_total ?? 0) / 100,
+      items,
     };
   } catch {
-    return { paid: false, ref: null, totalUsd: 0 };
+    return empty;
   }
 }
 
@@ -44,7 +66,7 @@ export default async function CheckoutSuccessPage({
   searchParams,
 }: SuccessPageProps) {
   const { session_id } = await searchParams;
-  const { paid, ref, totalUsd } = await getPaymentStatus(session_id);
+  const { paid, ref, totalUsd, items } = await getPaymentStatus(session_id);
 
   return (
     <Section bg="white">
@@ -89,6 +111,7 @@ export default async function CheckoutSuccessPage({
             sessionId={session_id}
             value={totalUsd}
             currency="USD"
+            items={items}
           />
         )}
       </Container>
